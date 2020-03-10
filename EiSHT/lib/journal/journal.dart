@@ -7,6 +7,7 @@ class JournalPage extends StatefulWidget {
 }
 
 class JournalPageState extends State<JournalPage> {
+  String newEntry = "";
 
   @override
   Widget build(BuildContext context) {
@@ -132,6 +133,7 @@ class JournalScreenState extends State<JournalScreen> {
                     color: Colors.orange,
                   ),
                 ),
+                // border: OutlineInputBorder(),
                 hintText: "Make new entry...",
                 prefixIcon: Icon(
                   Icons.note,
