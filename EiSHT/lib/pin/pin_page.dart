@@ -1,21 +1,6 @@
+// import 'package:EiSHT/goals/goal_setting.dart';
 import 'package:flutter/material.dart';
-
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  // This widget is the root of your application.
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Sign In',
-      theme: ThemeData(
-        primaryColor: Colors.red,
-        scaffoldBackgroundColor: Colors.white,
-      ),
-      home: MyHomePage(title: 'Sign In'),
-    );
-  }
-}
+import '../goals/goal_setting.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -35,7 +20,11 @@ class _MyHomePageState extends State<MyHomePage> {
     } else {
       output = output + buttonText;
       if (output == (password)) {
-        output = "WELCOME!";
+        // output = "WELCOME!";
+        Navigator.push(context,
+            MaterialPageRoute<bool>(builder: (BuildContext context) {
+          return GoalSetting();
+        }));
       }
     }
     setState(() {});
