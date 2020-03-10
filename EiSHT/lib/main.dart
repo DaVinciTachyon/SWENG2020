@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'goals/goal_setting.dart';
+import 'pin/pin_page.dart';
 
 void main() => runApp(MyApp());
 
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(),
+      home: MyHomePage(title: 'Sign In'),
       debugShowCheckedModeBanner: false,
     );
   }
