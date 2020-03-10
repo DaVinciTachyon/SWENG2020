@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../goals/goal_setting.dart';
+import '../navigation/main_nav.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);
@@ -19,10 +19,9 @@ class _MyHomePageState extends State<MyHomePage> {
     } else {
       output = output + buttonText;
       if (output == (password)) {
-        // output = "WELCOME!";
         Navigator.push(context,
             MaterialPageRoute<bool>(builder: (BuildContext context) {
-          return GoalSetting();
+          return MainNav();
         }));
       }
     }
