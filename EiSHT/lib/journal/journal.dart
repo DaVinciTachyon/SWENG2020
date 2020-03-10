@@ -6,32 +6,49 @@ class JournalPage extends StatefulWidget {
 }
 
 class JournalPageState extends State<JournalPage> {
-  String textEntry = "";
+  String newEntry = "";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.orange,
+        title: Text("Journal Page"),
+      ),
       body: Padding(
         padding: EdgeInsets.only(
-          bottom: MediaQuery.of(context).viewInsets.bottom,
-          top: 10.0,
-          left: 10.0,
-          right: 10.0,
+          bottom: 15.0,
+          top: 15.0,
+          left: 15.0,
+          right: 15.0,
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.end,
           children: <Widget>[
             // Padding(
             //   padding: EdgeInsets.only(left: 15.0),
             // ),
             TextFormField(
               decoration: InputDecoration(
-                border: OutlineInputBorder(),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(30.0),
+                  borderSide: BorderSide(
+                    color: Colors.orange,
+                  ),
+                ),
+                // border: OutlineInputBorder(),
                 hintText: "Make new entry...",
-                filled: true,
-                fillColor: Colors.orange,
+                prefixIcon: Icon(
+                  Icons.note,
+                  color: Colors.orange,
+                ),
+                // filled: true,
+                // fillColor: Colors.orange,
               ),
-              onChanged: (text) {
-                textEntry = text;
+              onChanged: (String text) {
+                setState(() {
+                  newEntry = text;
+                });
               },
             ),
           ],
