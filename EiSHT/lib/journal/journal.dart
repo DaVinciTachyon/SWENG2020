@@ -34,6 +34,7 @@ class JournalScreenState extends State<JournalScreen> {
     _textController.clear();
     JournalEntry entry;
     if (text != null && text != "") {
+      // .. to avoid null journal entries
       String thisInstant =
           "${DateTime.now()}"; // .. date and time of journal entry
       String month = thisInstant.substring(5, 7);
@@ -101,7 +102,7 @@ class JournalScreenState extends State<JournalScreen> {
       children: <Widget>[
         Flexible(
           child: ListView.builder(
-            padding: EdgeInsets.all(15.0),
+            //padding: EdgeInsets.all(15.0),
             itemBuilder: (_, int index) => _entries[index],
             itemCount: _entries.length,
           ),
@@ -129,22 +130,60 @@ class JournalEntry extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.symmetric(vertical: 15.0),
+      margin: EdgeInsets.only(
+        left: 15.0,
+        right: 15.0,
+        top: 15.0,
+      ),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
+            // .. date and time box
+            width: 60,
+            height: 50,
+            decoration: BoxDecoration(
+              color: Colors.orange[200],
+              border: Border.all(
+                color: Colors.orange[200],
+              ),
+              borderRadius: BorderRadius.circular(7),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black,
+                  blurRadius: 5.0,
+                  offset: Offset(3, 3),
+                ),
+              ],
+            ),
             alignment: Alignment.center,
             margin: EdgeInsets.only(right: 15.0),
             child: Text(
-              "$day-$month\n$time",
+              "$day/$month\n$time",
             ), // .. date of entry will be implemented here
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Container(
-                margin: EdgeInsets.only(top: 15.0),
+                // .. entry text box
+                width: MediaQuery.of(context).size.width - 105,
+                padding: EdgeInsets.all(16.0),
+                alignment: Alignment.centerLeft,
+                decoration: BoxDecoration(
+                  color: Colors.orange[200],
+                  border: Border.all(
+                    color: Colors.orange[200],
+                  ),
+                  borderRadius: BorderRadius.circular(7),
+                  boxShadow: [
+                    BoxShadow(
+                      color: Colors.black,
+                      blurRadius: 5.0,
+                      offset: Offset(3, 3),
+                    ),
+                  ],
+                ),
                 child: Text(text),
               ),
             ],
