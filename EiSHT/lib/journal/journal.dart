@@ -86,18 +86,12 @@ class JournalScreenState extends State<JournalScreen> {
 
   void _handleSubmission(String text) {
     _textController.clear();
-<<<<<<< HEAD
-    if (text != "") {
-      // .. to avoid null journal entries
-=======
-    JournalEntry entry;
+    //JournalEntry entry;
     if (text != null && text != "") {
->>>>>>> Added date and time to entries
       String thisInstant =
           "${DateTime.now()}"; // .. date and time of journal entry
       String month = thisInstant.substring(5, 7);
       String day = thisInstant.substring(8, 10);
-<<<<<<< HEAD
       String times = thisInstant.substring(11, 16);
       // if u want to remove seconds from the time of entry,
       // change the second paramter of "time" from 19 to 16,
@@ -108,13 +102,6 @@ class JournalScreenState extends State<JournalScreen> {
 
       createJournal();
      /* entry = Journal(day, month, time, text); // .. journal entry call
-=======
-      String time = thisInstant.substring(11, 16);
-      // if u want to remove seconds from the time of entry,
-      // change the second paramter of "time" from 19 to 16,
-      // to add seconds back, change from 16 to 19 :).
-      entry = JournalEntry(day, month, time, text); // .. journal entry call
->>>>>>> Added date and time to entries
       setState(() {
         _entries.insert(0, entry);
       });*/
@@ -244,7 +231,6 @@ class Journal extends StatelessWidget{
   String time;
   bool isDeleted;
 
-<<<<<<< HEAD
   Journal(this.id, this.body, this.date,this.time, this.isDeleted);
 
   Journal.fromJson(Map<String, dynamic> json) {
@@ -254,15 +240,6 @@ class Journal extends StatelessWidget{
     this.time = json[DatabaseCreator.time];
     this.isDeleted = json[DatabaseCreator.isDeleted] == 1;
   }
-=======
-class JournalEntry extends StatelessWidget {
-  final String day;
-  final String month;
-  final String time;
-  final String text;
-
-  JournalEntry(this.day, this.month, this.time, this.text);
->>>>>>> Added date and time to entries
 
 @override
   Widget build(BuildContext context) {
@@ -276,7 +253,6 @@ class JournalEntry extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
-<<<<<<< HEAD
             // .. date and time box
             padding: EdgeInsets.all(7.0),
             decoration: BoxDecoration(
@@ -300,12 +276,6 @@ class JournalEntry extends StatelessWidget {
               style: TextStyle(
                 fontFamily: 'Montserrat',
               ),
-=======
-            alignment: Alignment.center,
-            margin: EdgeInsets.only(right: 15.0),
-            child: Text(
-              "$day-$month\n$time",
->>>>>>> Added date and time to entries
             ), // .. date of entry will be implemented here
           ),
           Container(
@@ -418,16 +388,10 @@ class JournalEntry extends StatelessWidget {
 
 /*
 To Do Yet:
-<<<<<<< HEAD
 implement date into every journal entry                   (✔)
 make entries look better                                  (✔)
 swipe to delete an entry                                  (✔)
 add undo deletion functionality                           ()
 note saying swipe to delete after one entry               ()
 keep entries when exited the app                          ()
-=======
-implement date into every journal entry     (done)
-make entries look better                    (    )
-keep entries when exited the app            (    )
->>>>>>> Added date and time to entries
 */
