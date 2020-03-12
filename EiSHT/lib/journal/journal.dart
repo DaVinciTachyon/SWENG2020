@@ -34,7 +34,15 @@ class JournalScreenState extends State<JournalScreen> {
     _textController.clear();
     JournalEntry entry;
     if (text != null && text != "") {
-      entry = JournalEntry(text);
+      String thisInstant =
+          "${DateTime.now()}"; // .. date and time of journal entry
+      String month = thisInstant.substring(5, 7);
+      String day = thisInstant.substring(8, 10);
+      String time = thisInstant.substring(11, 16);
+      // if u want to remove seconds from the time of entry,
+      // change the second paramter of "time" from 19 to 16,
+      // to add seconds back, change from 16 to 19 :).
+      entry = JournalEntry(day, month, time, text); // .. journal entry call
       setState(() {
         _entries.insert(0, entry);
       });
@@ -42,6 +50,7 @@ class JournalScreenState extends State<JournalScreen> {
   }
 
   Widget _textComposer() {
+    // .. user input
     return Container(
       margin: EdgeInsets.symmetric(
         horizontal: 10.0,
@@ -110,9 +119,12 @@ class JournalScreenState extends State<JournalScreen> {
 }
 
 class JournalEntry extends StatelessWidget {
+  final String day;
+  final String month;
+  final String time;
   final String text;
 
-  JournalEntry(this.text);
+  JournalEntry(this.day, this.month, this.time, this.text);
 
   @override
   Widget build(BuildContext context) {
@@ -122,8 +134,11 @@ class JournalEntry extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
+            alignment: Alignment.center,
             margin: EdgeInsets.only(right: 15.0),
-            child: Text("DATE..."),           // .. date of entry will be implemented here
+            child: Text(
+              "$day-$month\n$time",
+            ), // .. date of entry will be implemented here
           ),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -142,7 +157,7 @@ class JournalEntry extends StatelessWidget {
 
 /*
 To Do Yet:
-implement date into every journal entry
-make entries look better
-keep entries when exited the app
+implement date into every journal entry     (done)
+make entries look better                    (    )
+keep entries when exited the app            (    )
 */
