@@ -371,12 +371,12 @@ class Journal extends StatelessWidget{
                   blurRadius: 5.0,
                   offset: Offset(3, 3),
                 ),
-              ],
-            ),
-            child: Text(
-              text,
-              style: TextStyle(
-                fontFamily: 'Montserrat',
+                child: Text(
+                  text,
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                  ),
+                ),
               ),
             ),
           ),
