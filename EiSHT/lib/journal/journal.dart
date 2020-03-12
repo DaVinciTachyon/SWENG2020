@@ -13,7 +13,13 @@ class JournalPageState extends State<JournalPage> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.orange,
-        title: Text("Journal Page"),
+        title: Text(
+          "Journal Page",
+          style: TextStyle(
+            fontFamily: 'Montserrat',
+            fontWeight: FontWeight.bold,
+          ),
+        ),
       ),
       body: JournalScreen(),
     );
@@ -160,6 +166,9 @@ class JournalEntry extends StatelessWidget {
             margin: EdgeInsets.only(right: 15.0),
             child: Text(
               "$day/$month\n$time",
+              style: TextStyle(
+                fontFamily: 'Montserrat',
+              ),
             ), // .. date of entry will be implemented here
           ),
           Column(
@@ -184,7 +193,12 @@ class JournalEntry extends StatelessWidget {
                     ),
                   ],
                 ),
-                child: Text(text),
+                child: Text(
+                  text,
+                  style: TextStyle(
+                    fontFamily: 'Montserrat',
+                  ),
+                ),
               ),
             ],
           ),
