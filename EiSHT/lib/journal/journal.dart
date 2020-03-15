@@ -377,6 +377,12 @@ class Journal extends StatelessWidget{
                     fontFamily: 'Montserrat',
                   ),
                 ),
+              ],
+            ),
+            child: Text(
+              text,
+              style: TextStyle(
+                fontFamily: 'Montserrat',
               ),
             ),
           ),
