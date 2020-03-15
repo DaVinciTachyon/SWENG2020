@@ -1,4 +1,3 @@
-import 'dart:io';
 
 import "package:flutter/material.dart";
 
@@ -108,9 +107,28 @@ class JournalScreenState extends State<JournalScreen> {
       children: <Widget>[
         Flexible(
           child: ListView.builder(
-            //padding: EdgeInsets.all(15.0),
-            itemBuilder: (_, int index) => _entries[index],
             itemCount: _entries.length,
+            itemBuilder: (context, int index) {
+              return Dismissible(
+                key: Key(_entries[index].text),
+                onDismissed: (direction) {
+                  // .. delete entry
+                  _entries.removeAt(index);
+                  Scaffold.of(context).showSnackBar(
+                    SnackBar(
+                      // .. delete message
+                      content: Text("ENTRY REMOVED"),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                      backgroundColor: Color.fromRGBO(0, 0, 0, 0.65),
+                      elevation: 0,
+                    ),
+                  );
+                },
+                child: _entries[index],
+              );
+            },
           ),
         ),
         Divider(height: 5.0),
@@ -146,8 +164,7 @@ class JournalEntry extends StatelessWidget {
         children: <Widget>[
           Container(
             // .. date and time box
-            width: 60,
-            height: 50,
+            padding: EdgeInsets.all(7.0),
             decoration: BoxDecoration(
               color: Colors.orange[200],
               border: Border.all(
@@ -171,36 +188,31 @@ class JournalEntry extends StatelessWidget {
               ),
             ), // .. date of entry will be implemented here
           ),
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Container(
-                // .. entry text box
-                width: MediaQuery.of(context).size.width - 105,
-                padding: EdgeInsets.all(16.0),
-                alignment: Alignment.centerLeft,
-                decoration: BoxDecoration(
-                  color: Colors.orange[200],
-                  border: Border.all(
-                    color: Colors.orange[200],
-                  ),
-                  borderRadius: BorderRadius.circular(7),
-                  boxShadow: [
-                    BoxShadow(
-                      color: Colors.black,
-                      blurRadius: 5.0,
-                      offset: Offset(3, 3),
-                    ),
-                  ],
-                ),
-                child: Text(
-                  text,
-                  style: TextStyle(
-                    fontFamily: 'Montserrat',
-                  ),
-                ),
+          Container(
+            // .. entry text box
+            width: MediaQuery.of(context).size.width - 100,
+            padding: EdgeInsets.all(15.0),
+            alignment: Alignment.centerLeft,
+            decoration: BoxDecoration(
+              color: Colors.orange[200],
+              border: Border.all(
+                color: Colors.orange[200],
               ),
-            ],
+              borderRadius: BorderRadius.circular(7),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black,
+                  blurRadius: 5.0,
+                  offset: Offset(3, 3),
+                ),
+              ],
+            ),
+            child: Text(
+              text,
+              style: TextStyle(
+                fontFamily: 'Montserrat',
+              ),
+            ),
           ),
         ],
       ),
@@ -210,7 +222,9 @@ class JournalEntry extends StatelessWidget {
 
 /*
 To Do Yet:
-implement date into every journal entry     (done)
-make entries look better                    (    )
-keep entries when exited the app            (    )
+implement date into every journal entry                   (✔)
+make entries look better                                  (✔)
+swipe to delete an entry                                  (✔)
+note saying swipe to delete after one entry               ()
+keep entries when exited the app                          ()
 */
