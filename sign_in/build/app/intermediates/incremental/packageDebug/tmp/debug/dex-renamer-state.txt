@@ -1,0 +1,4 @@
+#Sat Feb 15 20:51:51 GMT 2020
+base.0=C\:\\Users\\jason\\workspace\\FlutterApps\\sign_in\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\out\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
