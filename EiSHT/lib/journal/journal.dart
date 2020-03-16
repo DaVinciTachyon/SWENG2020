@@ -1,4 +1,3 @@
-
 import "package:flutter/material.dart";
 
 class JournalPage extends StatefulWidget {
@@ -91,7 +90,7 @@ class JournalScreenState extends State<JournalScreen> {
             margin: EdgeInsets.symmetric(horizontal: 10.0),
             child: IconButton(
               // .. save entry
-              icon: Icon(Icons.save),
+              icon: Icon(Icons.class_),
               color: Colors.orange,
               onPressed: () => _handleSubmission(_textController.text),
             ),
@@ -113,6 +112,7 @@ class JournalScreenState extends State<JournalScreen> {
                 key: Key(_entries[index].text),
                 onDismissed: (direction) {
                   // .. delete entry
+                  // JournalEntry entryRemoved = _entries[index];
                   _entries.removeAt(index);
                   Scaffold.of(context).showSnackBar(
                     SnackBar(
@@ -123,6 +123,13 @@ class JournalScreenState extends State<JournalScreen> {
                       ),
                       backgroundColor: Color.fromRGBO(0, 0, 0, 0.65),
                       elevation: 0,
+                      behavior: SnackBarBehavior.floating,
+                      // action: SnackBarAction(
+                      //   label: "UNDO",
+                      //   onPressed: () {
+                      //     // .. undo function needs to be implemented
+                      //   },
+                      // ),
                     ),
                   );
                 },
@@ -225,6 +232,7 @@ To Do Yet:
 implement date into every journal entry                   (✔)
 make entries look better                                  (✔)
 swipe to delete an entry                                  (✔)
+add undo deletion functionality                           ()
 note saying swipe to delete after one entry               ()
 keep entries when exited the app                          ()
 */
