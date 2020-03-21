@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import '../goals/goal_setting.dart';
-import '../journal/journal.dart';
+import '../journalSaver/journalSaver.dart';
 
 class MainNav extends StatelessWidget {
   @override

@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import '../goals/goal_setting.dart';
+//import '../goals/goal_setting.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../navigation/main_nav.dart';
@@ -22,32 +22,47 @@ class _MyHomePageState extends State<MyHomePage> {
   bool testBool;
 
 
-
+  readBool() async {
+    final prefs = await SharedPreferences.getInstance();
+    testBool = prefs.getBool('setBool') ?? false;
+  }
+  readInPassword() async{ //reads password from local data and stores in string readPassword
+    final prefs = await SharedPreferences.getInstance();
+    readPassword = prefs.getString('setPassword') ?? "";
+  }
+  setBool() async{
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setBool('setBool', true);
+  }
+  setPassword() async{ // sets string 'newPin' in local database under 'setPassword'
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString('setPassword', newPin);
+  }
 
   buttonPressed(String buttonText) {
-    if (buttonText == "clear" && output.length !=0) {
+    if (buttonText == "clear" && output.length != 0) {
       output = output.substring(0, output.length - 1);
     }
-    else if (buttonText=="clear"){
+    else if (buttonText == "clear") {
 
-  }
-    else{
+    }
+    else {
       output = output + buttonText;
       readInPassword();
       if (output == (readPassword)) {
-
-      if (output == (password)) {
         Navigator.push(context,
             MaterialPageRoute<bool>(builder: (BuildContext context) {
-          return MainNav();
-        }));
+              return MainNav();
+            }));
       }
+
+      setState(() {});
     }
-    setState(() {});
   }
   buttonPressedPin(){
 
   }
+
   Widget buildButton(String numbers) {
     return new Expanded(
       child: new RaisedButton(
@@ -239,20 +254,5 @@ class _MyHomePageState extends State<MyHomePage> {
           ));
     }
   }
-  readBool() async {
-    final prefs = await SharedPreferences.getInstance();
-    testBool = prefs.getBool('setBool') ?? false;
-  }
-  readInPassword() async{ //reads password from local data and stores in string readPassword
-    final prefs = await SharedPreferences.getInstance();
-    readPassword = prefs.getString('setPassword') ?? "";
-  }
-  setBool() async{
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setBool('setBool', true);
-  }
-  setPassword() async{ // sets string 'newPin' in local database under 'setPassword'
-    final prefs = await SharedPreferences.getInstance();
-    prefs.setString('setPassword', newPin);
-  }
+
 }
