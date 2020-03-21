@@ -64,11 +64,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   }
 
-  Widget buildButton(String numbers) {
-    return new Expanded(
-      child: new RaisedButton(
-        color: Theme.of(context).buttonColor,
-    }
+
     Widget buildButton(String numbers) {
       return new Expanded(
         child: new RaisedButton(
