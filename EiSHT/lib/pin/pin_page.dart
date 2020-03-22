@@ -57,8 +57,9 @@ class _MyHomePageState extends State<MyHomePage> {
             }));
       }
 
-      setState(() {});
+
     }
+    setState(() {});
   }
     buttonPressedPin() {
 
@@ -116,7 +117,7 @@ class _MyHomePageState extends State<MyHomePage> {
             )
         );
       }
-      else {
+
         return Scaffold(
 
             appBar: AppBar(
@@ -258,6 +259,6 @@ class _MyHomePageState extends State<MyHomePage> {
             ));
       }
 
-  }
+
 
 }

@@ -11,6 +11,7 @@ class DatabaseCreator{
   static const id = 'id';
   static const body = 'body';
   static const date = 'date';
+  static const time = 'time';
   static const isDeleted = 'isDeleted';
 
   static void databaseLog(String functionName, String sql,
@@ -30,6 +31,7 @@ class DatabaseCreator{
       $id INTEGER PRIMARY KEY,
       $body TEXT,
       $date TEXT,
+      $time TEXT,
       $isDeleted BIT NOT NULL
     )''';
 

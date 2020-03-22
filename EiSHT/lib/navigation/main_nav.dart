@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
 import '../goals/goal_setting.dart';
-import '../journalSaver/journalSaver.dart';
+import '../journal/journal.dart';
 
 class MainNav extends StatelessWidget {
   @override
@@ -18,6 +18,7 @@ class MainNav extends StatelessWidget {
       RaisedButton(
           child: Text('Journal'),
           onPressed: () {
+            print("journal pressed");
             Navigator.push(context,
                 MaterialPageRoute<bool>(builder: (BuildContext context) {
               return JournalPage();

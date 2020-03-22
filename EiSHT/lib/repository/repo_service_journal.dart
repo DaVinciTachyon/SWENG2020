@@ -1,5 +1,6 @@
-import '../models/journalModel.dart';
+//import '../models/journalModel.dart';
 import '../repository/model.dart';
+import '../journal/journal.dart';
 
 class RepositoryServiceJournal {
   static Future<List<Journal>> getAllJournals() async {
@@ -51,10 +52,11 @@ class RepositoryServiceJournal {
       ${DatabaseCreator.id},
       ${DatabaseCreator.body},
       ${DatabaseCreator.date},
+      ${DatabaseCreator.time},
       ${DatabaseCreator.isDeleted}
     )
-    VALUES (?,?,?,?)''';
-    List<dynamic> params = [journal.id, journal.body, journal.date, journal.isDeleted ? 1 : 0];
+    VALUES (?,?,?,?,?)''';
+    List<dynamic> params = [journal.id, journal.body, journal.date,journal.time, journal.isDeleted ? 1 : 0];
     final result = await db.rawInsert(sql, params);
     DatabaseCreator.databaseLog('Add journal', sql, null, result, params);
   }
@@ -99,5 +101,18 @@ class RepositoryServiceJournal {
     int count = data[0].values.elementAt(0);
     int idForNewItem = count++;
     return idForNewItem;
+  }
+  static Future<int> journalsCountWithoutDeleted() async{
+final sql = '''SELECT * FROM ${DatabaseCreator.journalTable}
+    WHERE ${DatabaseCreator.isDeleted} = 0''';
+final data = await db.rawQuery(sql);
+List<Journal> journals = List();
+
+for (final node in data) {
+  final journal = Journal.fromJson(node);
+  journals.add(journal);
+}
+return journals.length;
+
   }
 }

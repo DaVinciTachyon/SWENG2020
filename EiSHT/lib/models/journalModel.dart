@@ -4,6 +4,7 @@ class Journal {
   int id;
   String body;
   String date;
+  String time;
   bool isDeleted;
 
   Journal(this.id, this.body, this.date, this.isDeleted);
@@ -12,6 +13,7 @@ class Journal {
     this.id = json[DatabaseCreator.id];
     this.body = json[DatabaseCreator.body];
     this.date = json[DatabaseCreator.date];
+    this.time = json[DatabaseCreator.time];
     this.isDeleted = json[DatabaseCreator.isDeleted] == 1;
   }
 }

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'pin/pin_page.dart';
+import 'repository/model.dart';
 
-
-void main() => runApp(MyApp());
-
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await DatabaseCreator().initDatabase();
+  print("initialized");
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
 
