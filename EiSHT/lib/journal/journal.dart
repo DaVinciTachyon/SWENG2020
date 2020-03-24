@@ -7,7 +7,6 @@ class JournalPage extends StatefulWidget {
 }
 
 class JournalPageState extends State<JournalPage> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -27,7 +26,6 @@ class JournalPageState extends State<JournalPage> {
 }
 
 class JournalScreen extends StatefulWidget {
-
   @override
   State createState() => JournalScreenState();
 }
@@ -49,7 +47,7 @@ class JournalScreenState extends State<JournalScreen> {
     setState(() {
 
     });
-  } // .. To hold all journal entries*/
+  } // .. To hold all journal entries
 
   void readData() async {
     final journal = await RepositoryServiceJournal.getJournal(id);
@@ -88,8 +86,7 @@ class JournalScreenState extends State<JournalScreen> {
 
   void _handleSubmission(String text) {
     _textController.clear();
-    if (text != "") {
-      // .. to avoid null journal entries
+    if (text != null && text != "") {
       String thisInstant =
           "${DateTime.now()}"; // .. date and time of journal entry
       String month = thisInstant.substring(5, 7);
@@ -103,10 +100,6 @@ class JournalScreenState extends State<JournalScreen> {
       time = times;
 
       createJournal();
-     /* entry = Journal(day, month, time, text); // .. journal entry call
-      setState(() {
-        _entries.insert(0, entry);
-      });*/
     }
   }
 
@@ -194,11 +187,9 @@ class JournalScreenState extends State<JournalScreen> {
           print("count is " + _entries.length.toString());
           id = index;
           return new Dismissible(
-            //key: Key(_entries[index].body),
             key: UniqueKey(),
             onDismissed: (direction) {
               // .. delete entry
-              // JournalEntry entryRemoved = _entries[index];
               Journal t =  _entries[index];
               deleteJournal(t);
               Scaffold.of(context).showSnackBar(
@@ -311,82 +302,6 @@ class Journal extends StatelessWidget{
     );
   }
 }
-/*class JournalEntry extends StatelessWidget {
-  final String day;
-  final String month;
-  final String time;
-  final String text;
-
-  JournalEntry(this.day, this.month, this.time, this.text);
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.only(
-        left: 15.0,
-        right: 15.0,
-        top: 15.0,
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Container(
-            // .. date and time box
-            padding: EdgeInsets.all(7.0),
-            decoration: BoxDecoration(
-              color: Colors.orange[200],
-              border: Border.all(
-                color: Colors.orange[200],
-              ),
-              borderRadius: BorderRadius.circular(7),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black,
-                  blurRadius: 5.0,
-                  offset: Offset(3, 3),
-                ),
-              ],
-            ),
-            alignment: Alignment.center,
-            margin: EdgeInsets.only(right: 15.0),
-            child: Text(
-              "$day/$month\n$time",
-              style: TextStyle(
-                fontFamily: 'Montserrat',
-              ),
-            ), // .. date of entry will be implemented here
-          ),
-          Container(
-            // .. entry text box
-            width: MediaQuery.of(context).size.width - 100,
-            padding: EdgeInsets.all(15.0),
-            alignment: Alignment.centerLeft,
-            decoration: BoxDecoration(
-              color: Colors.orange[200],
-              border: Border.all(
-                color: Colors.orange[200],
-              ),
-              borderRadius: BorderRadius.circular(7),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black,
-                  blurRadius: 5.0,
-                  offset: Offset(3, 3),
-                ),
-              ],
-            ),
-            child: Text(
-              text,
-              style: TextStyle(
-                fontFamily: 'Montserrat',
-              ),
-            ),
-          ),
-        ],
-      ),
-    );
-  }*/
-//}
 
 /*
 To Do Yet:
