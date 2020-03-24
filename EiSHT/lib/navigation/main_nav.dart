@@ -18,6 +18,7 @@ class MainNav extends StatelessWidget {
       RaisedButton(
           child: Text('Journal'),
           onPressed: () {
+            print("journal pressed");
             Navigator.push(context,
                 MaterialPageRoute<bool>(builder: (BuildContext context) {
               return JournalPage();
