@@ -70,12 +70,10 @@ class _DetailsPageState extends State<DetailsPage> {
                   child: Container(
                     decoration: BoxDecoration(
                       image: DecorationImage(
-                        image: AssetImage(widget.heroTag),
-                        fit: BoxFit.cover
-                      ),
+                          image: AssetImage(widget.heroTag), fit: BoxFit.cover),
                     ),
                     height: 200.0,
-                    width:200.0,
+                    width: 200.0,
                   ),
                 ),
               ),
