@@ -19,11 +19,15 @@ class MyApp extends StatelessWidget {
       return MaterialApp(
         title: 'EiSHT',
         theme: ThemeData(
+          fontFamily: 'Montserrat',
           brightness: Brightness.light,
           primaryColor: Colors.deepOrange[300],
           accentColor: Colors.deepOrange[700],
           scaffoldBackgroundColor: Colors.amber[50],
           buttonColor: Colors.white,
+          textSelectionColor: Colors.white,
+
+
 
         ),
 

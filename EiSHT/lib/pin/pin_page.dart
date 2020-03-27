@@ -46,6 +46,9 @@ class _MyHomePageState extends State<MyHomePage> {
     else if (buttonText == "clear") {
 
     }
+    else if (output.length==4){
+      //do nothing
+    }
     else {
       output = output + buttonText;
       readInPassword();
@@ -69,6 +72,8 @@ class _MyHomePageState extends State<MyHomePage> {
     Widget buildButton(String numbers) {
       return new Expanded(
         child: new RaisedButton(
+          elevation: 0.5,
+
           color: Theme
               .of(context)
               .buttonColor,
@@ -97,7 +102,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: new Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      new Text('Enter New Pin', style:
+                      new Text('Enter new 4-digit pin...', style:
                       TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
                       ),
                       new TextField(
@@ -121,8 +126,9 @@ class _MyHomePageState extends State<MyHomePage> {
         return Scaffold(
 
             appBar: AppBar(
+              elevation: 0.0,
               centerTitle: true,
-              title: Text(widget.title, style: TextStyle(color: Colors.white)),
+              title: Text(widget.title, style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
               backgroundColor: Theme
                   .of(context)
                   .primaryColor,
@@ -197,13 +203,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                       new Expanded(
                         child: new RaisedButton(
+                          elevation: 0.5,
+
                           shape: new CircleBorder(),
                           color: Theme
                               .of(context)
                               .buttonColor,
                           padding: new EdgeInsets.all(24.0),
                           child: new Text(
-                            "clear",
+                            "C",
                             style: TextStyle(
                                 fontSize: 20.0, fontWeight: FontWeight.bold),
                           ),
