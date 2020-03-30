@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'detailsPage.dart';
-
+import 'ANewGoal.dart';
 class GoalSetting extends StatefulWidget {
   @override
   _GoalSettingState createState() => _GoalSettingState();
@@ -107,10 +107,22 @@ class _GoalSettingState extends State<GoalSetting> {
     return Padding(
         padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
         child: InkWell(
-          onTap: () {
+          onTap: ()async {
+            ANewGoal makeGoal =await
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) =>
-                    DetailsPage(heroTag: imgPath, goalName: goalName)));
+
+                    DetailsPage(heroTag: imgPath, goalName: goalName))
+            );
+            if(makeGoal!= null){
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) =>
+
+                      DetailsPage(heroTag: imgPath, goalName: goalName, newGoalName : makeGoal.goalName,
+                          newMiniGoal: makeGoal.goalMini, newDescription : makeGoal.goalDescription))
+              );
+            }
+
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
