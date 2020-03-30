@@ -10,11 +10,23 @@ class JournalPageState extends State<JournalPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Theme.of(context).scaffoldBackgroundColor,
       appBar: AppBar(
-        backgroundColor: Colors.orange,
+        iconTheme: IconThemeData(
+
+          color: Theme.of(context).buttonColor, //change your color here
+        ),
+        centerTitle: true,
+        elevation: 0.0,
+        backgroundColor: Theme
+            .of(context)
+            .primaryColor,
+
         title: Text(
           "Journal Page",
+
           style: TextStyle(
+            color: Colors.white,
             fontFamily: 'Montserrat',
             fontWeight: FontWeight.bold,
           ),
@@ -106,6 +118,7 @@ class JournalScreenState extends State<JournalScreen> {
   Widget _textComposer() {
     // .. user input
     return Container(
+      color:Theme.of(context).buttonColor,
       margin: EdgeInsets.symmetric(
         horizontal: 10.0,
         vertical: 10.0,
@@ -116,19 +129,24 @@ class JournalScreenState extends State<JournalScreen> {
             child: TextField(
               // .. for journal entries
               decoration: InputDecoration(
+
                 border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30.0),
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(30.0),
                   borderSide: BorderSide(
-                    color: Colors.orange,
+                    color: Theme
+                        .of(context)
+                        .primaryColor,
                   ),
                 ),
                 hintText: "Make new entry...",
                 prefixIcon: Icon(
                   Icons.note,
-                  color: Colors.orange,
+                  color: Theme
+                      .of(context)
+                      .primaryColor,
                 ),
               ),
               controller: _textController,
@@ -136,11 +154,14 @@ class JournalScreenState extends State<JournalScreen> {
             ),
           ),
           Container(
+            color: Theme.of(context).buttonColor,
             margin: EdgeInsets.symmetric(horizontal: 10.0),
             child: IconButton(
               // .. save entry
               icon: Icon(Icons.class_),
-              color: Colors.orange,
+              color: Theme
+                  .of(context)
+                  .primaryColor,
               onPressed: () => _handleSubmission(_textController.text),
             ),
           ),
@@ -171,8 +192,9 @@ class JournalScreenState extends State<JournalScreen> {
         ),
         Divider(height: 5.0),
         Container(
+
           decoration: BoxDecoration(
-            color: Theme.of(context).cardColor,
+            color: Theme.of(context).buttonColor,
           ),
           child: _textComposer(),
         ),
@@ -182,11 +204,13 @@ class JournalScreenState extends State<JournalScreen> {
   createListView(BuildContext context, AsyncSnapshot snapshot){
     List<Journal> _entries = snapshot.data;
       return new ListView.builder(
+
         itemCount: _entries.length,
         itemBuilder: (context, int index) {
           print("count is " + _entries.length.toString());
           id = index;
           return new Dismissible(
+
             key: UniqueKey(),
             onDismissed: (direction) {
               // .. delete entry
@@ -195,6 +219,7 @@ class JournalScreenState extends State<JournalScreen> {
               Scaffold.of(context).showSnackBar(
                 SnackBar(
                   // .. delete message
+
                   content: Text("ENTRY REMOVED"),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
@@ -237,6 +262,7 @@ class Journal extends StatelessWidget{
 @override
   Widget build(BuildContext context) {
     return Container(
+      color:Theme.of(context).scaffoldBackgroundColor,
       margin: EdgeInsets.only(
         left: 15.0,
         right: 15.0,
@@ -246,19 +272,25 @@ class Journal extends StatelessWidget{
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Container(
+
             // .. date and time box
             padding: EdgeInsets.all(7.0),
             decoration: BoxDecoration(
-              color: Colors.orange[200],
+              color: Theme
+                  .of(context)
+                  .buttonColor,
               border: Border.all(
-                color: Colors.orange[200],
+                color: Theme
+                    .of(context)
+                      .buttonColor,
               ),
               borderRadius: BorderRadius.circular(7),
               boxShadow: [
                 BoxShadow(
+
                   color: Colors.black,
-                  blurRadius: 5.0,
-                  offset: Offset(3, 3),
+                  blurRadius: 1.0,
+                  offset: Offset(.2, .2),
                 ),
               ],
             ),
@@ -277,16 +309,20 @@ class Journal extends StatelessWidget{
             padding: EdgeInsets.all(15.0),
             alignment: Alignment.centerLeft,
             decoration: BoxDecoration(
-              color: Colors.orange[200],
+              color: Theme
+                  .of(context)
+                  .buttonColor,
               border: Border.all(
-                color: Colors.orange[200],
+                color: Theme
+                    .of(context)
+                      .buttonColor,
               ),
               borderRadius: BorderRadius.circular(7),
               boxShadow: [
                 BoxShadow(
                   color: Colors.black,
-                  blurRadius: 5.0,
-                  offset: Offset(3, 3),
+                  blurRadius: 1.0,
+                  offset: Offset(.2, .2),
                 ),
               ],
             ),
