@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'createGoals.dart';
+import 'ANewGoal.dart';
 
 class DetailsPage extends StatefulWidget {
   final heroTag;
@@ -18,6 +19,8 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
+ List <ANewGoal> goals = List();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +51,8 @@ class _DetailsPageState extends State<DetailsPage> {
           ),
         ],
       ),
-      body: ListView(children: [
+      body:
+      ListView(children: [
         Stack(
           children: [
             Container(
@@ -109,10 +113,13 @@ class _DetailsPageState extends State<DetailsPage> {
                       width: 80.0
                     ),
                     InkWell(
-                      onTap: (){
-                      Navigator.of(context).push(MaterialPageRoute(
+                      onTap: () async {
+                        ANewGoal newGoal = await
+                        Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) =>
-                      CreateGoal(goalType : widget.goalName,  imageSizeForTop: MediaQuery.of(context).size ))); },
+                      CreateGoal(goalType : widget.goalName,  imageSizeForTop: MediaQuery.of(context).size )));
+                        print(newGoal.goalName);
+                        },
                       child: Container(
                         margin: EdgeInsets.symmetric( vertical: 1.0, horizontal: 5.0 ),
                         height: 35.0,
@@ -125,7 +132,6 @@ class _DetailsPageState extends State<DetailsPage> {
                               color: Colors.white,
                             size : 30.0,
                           ),
-
                         ),
                       ),
                     ),
@@ -133,10 +139,28 @@ class _DetailsPageState extends State<DetailsPage> {
                 ),
               ),
             ),
+           /* ListView.builder(
+                itemCount: goals.length,
+                itemBuilder: (context,index){
+                  return ListTile(
+                    title :
+                  ),
+                },
+            ),*/
           ],
         ),
-      ], scrollDirection: Axis.vertical
+
+      ], scrollDirection: Axis.vertical,
       ),
+
+
     );
   }
+}
+Widget _creatingTheGoal( String _newGoalName ,String miniGoal, String _newGoalDescription) {
+
+  return Padding(
+
+
+  );
 }

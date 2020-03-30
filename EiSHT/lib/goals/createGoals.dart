@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+import 'detailsPage.dart';
+import 'ANewGoal.dart';
 
 class CreateGoal extends StatefulWidget {
   final goalType;
@@ -40,12 +42,12 @@ class _CreateGoalState extends State<CreateGoal> {
       );
 
     }
-    Widget  _buildminiGoal() {
+    Widget  _buildMiniGoal() {
       return TextFormField(
         decoration : InputDecoration(labelText: 'Mini daily goal'),
         validator: (String value){
           if(value.isEmpty){
-            return 'Gmini daily goal is required.';
+            return 'Mini daily goal is required.';
           }
           return null;
         },
@@ -131,7 +133,7 @@ class _CreateGoalState extends State<CreateGoal> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children:<Widget>[
                     _buildNewGoalName(),
-                    _buildminiGoal(),
+                    _buildMiniGoal(),
                     _buildNewGoalDescription(),
 
 
@@ -142,18 +144,15 @@ class _CreateGoalState extends State<CreateGoal> {
                       fontSize: 20,
                     ),
                     ),
-                      onPressed: () =>{
-                      if (_formKey.currentState.validate()) {
-                        _formKey.currentState.save(),
-                        // Navigator.of(context).pop(MaterialPageRoute(
-                        //  builder: (context) =>
-                      }
-              //  }
+                      onPressed: () {
+                      if (_formKey.currentState.validate() )
+                      {
+                        _formKey.currentState.save();
+                        ANewGoal _theGoal =new ANewGoal(_newGoalName, _miniGoal,_newGoalDescription );
+                        Navigator.pop(context,_theGoal);
+                       }
 
-
-
-
-                },
+                    },
                     ),
                   ],
                 ),
@@ -170,9 +169,3 @@ class _CreateGoalState extends State<CreateGoal> {
 }
 
 
-Widget _creatingTheGoal( String _newGoalName ,String miniGoal, String _newGoalDescription) {
-
-  return Padding(
-
-);
-}
