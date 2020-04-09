@@ -87,3 +87,9 @@ Widget createWidgetForTesting({Widget child}){
 //        journalScreenState.handleSubmission(
 //            "test input"); //note: this required removing _ from handleSubmission
 //      });
+//    test("testing readData", () {
+//        JournalScreenState journalScreenState = JournalScreenState();
+//        journalScreenState.handleSubmission(
+//            "test input"); //note: this required removing _ from handleSubmission
+//      });
+//    });
