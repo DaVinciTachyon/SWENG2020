@@ -4,163 +4,136 @@ import '../goals/goal_setting.dart';
 import '../journal/journal.dart';
 
 class MainNav extends StatelessWidget {
-  final int buttonHeight=150;
+  final double buttonHeight = 100;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: Column(
         children: <Widget>[
-
           Container(
-
             width: double.infinity,
             //height: 490,
-            height:(MediaQuery.of(context).size.height)-buttonHeight-buttonHeight-15,
+            height: (MediaQuery.of(context).size.height) -
+                buttonHeight -
+                buttonHeight -
+                buttonHeight -
+                15,
             decoration: BoxDecoration(
-              color: Theme
-                  .of(context)
-                  .primaryColor,
+              color: Theme.of(context).primaryColor,
               border: Border.all(
-                color: Theme
-                    .of(context)
-                    .primaryColor,
+                color: Theme.of(context).primaryColor,
               ),
             ),
             padding: EdgeInsets.all(90),
             child: Column(
-             mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
                     FlatButton(
-                     // padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
+                      // padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
                       shape: new CircleBorder(),
-                    // color: Colors.white,
-                      child: ClipRRect
-                        (
-                        borderRadius: BorderRadius.circular((75/2)),
+                      // color: Colors.white,
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular((75 / 2)),
 
-                        child:Image(
-                          image: AssetImage('images/logo-ed.png'),
-                        fit: BoxFit.cover,
-                        height: 70,
-                        width: 70),
-                      //icon: Image.asset('images/logo.jpg'),
-                     // icon: Image.asset('037-fame.png'),
+                        child: Image(
+                            image: AssetImage('images/logo-ed.png'),
+                            fit: BoxFit.cover,
+                            height: 70,
+                            width: 70),
+                        //icon: Image.asset('images/logo.jpg'),
+                        // icon: Image.asset('037-fame.png'),
                       ),
 
-
-                      onPressed: (){
-
-                      },
+                      onPressed: () {},
                     ),
                   ],
                 ),
                 RichText(
-                //  textAlign: TextAlign.center,
-                  text: TextSpan(
-                    children: <TextSpan>[
-                      TextSpan(
-                        text: "Welcome to",
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontWeight: FontWeight.bold,
-                        ),
+                  //  textAlign: TextAlign.center,
+                  text: TextSpan(children: <TextSpan>[
+                    TextSpan(
+                      text: "Welcome to",
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontWeight: FontWeight.bold,
                       ),
-                      TextSpan(
-                        text: "\nEiSHT",
-                        style: TextStyle(
-                          fontFamily: 'Montserrat',
-                          fontSize: 60,
-                        ),
+                    ),
+                    TextSpan(
+                      text: "\nEiSHT",
+                      style: TextStyle(
+                        fontFamily: 'Montserrat',
+                        fontSize: 60,
                       ),
-                    ]
-                  ),
+                    ),
+                  ]),
                 ),
-
               ],
             ),
           ),
-
-          Container(
-            width: double.infinity,
-            height: 150,
-            padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
-            child: RaisedButton(
-              elevation: 0.5,
-              color: Theme
-                  .of(context)
-                  .buttonColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(75.0),
-              ),
-              child: Text(
-                "Goals",
-                style: TextStyle(
-                  fontSize: 25.0,
-
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.bold,
-                  color: Theme
-                      .of(context)
-                      .primaryColor,
-                ),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<bool>(
-                    builder: (BuildContext context) {
-                      return GoalSetting();
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            height: 150,
-            padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
-            child: RaisedButton(
-              elevation: 0.5,
-
-              color: Theme
-                  .of(context)
-                  .buttonColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(75.0),
-              ),
-              child: Text(
-                "Journal",
-                style: TextStyle(
-                  fontSize: 25.0,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.bold,
-                  color: Theme
-                      .of(context)
-                      .primaryColor,
-                ),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<bool>(
-                    builder: (BuildContext context) {
-                      return JournalPage();
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
-
+          _button(context, GoalSetting(), buttonHeight, "Goals"),
+          _button(context, JournalPage(), buttonHeight, "Text Journal"),
+          _button(context, null, buttonHeight, "Audio Journal"),
+          // .. TODO: replace "null" with audio entries page when built
         ],
       ),
-
-
     );
   }
 }
+
+Widget _button(BuildContext context, Widget dest, double height, String text) {
+  return Container(
+    width: double.infinity,
+    height: height,
+    padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
+    child: RaisedButton(
+      elevation: 0.5,
+      color: Theme.of(context).buttonColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(75.0),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 20.0,
+          fontFamily: 'Montserrat',
+          fontWeight: FontWeight.bold,
+          color: Theme.of(context).primaryColor,
+        ),
+      ),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute<bool>(
+            builder: (BuildContext context) {
+              return dest;
+            },
+          ),
+        );
+      },
+    ),
+  );
+}
+
+// Widget _journalDropDown(BuildContext context) {
+//   var _buttons = [_textEntriesButton(context), _audioEntriesButton(context)];
+
+//   return Container(
+//     width: double.infinity,
+//     height: 150,
+//     padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
+//     child: DropdownButton<Widget>(
+//       items: _buttons.map((Widget dropDownWidgetItem) {
+//         return DropdownMenuItem<Widget>(
+//           value: dropDownWidgetItem,
+//           child: Text("Text goes here"),
+//         );
+//       }).toList(),
+//     ),
+//   );
+// }
+
+// i tried to get that to work, maybe later
