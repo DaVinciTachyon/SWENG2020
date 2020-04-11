@@ -47,6 +47,7 @@ class JournalScreenState extends State<JournalScreen> {
   int count;
   String date;
   String content;
+
   @override
   initState() {
     super.initState();
@@ -155,15 +156,17 @@ class JournalScreenState extends State<JournalScreen> {
   @override
   Widget build(BuildContext context) {
     var futureBuilders = new FutureBuilder(
-        future: _entries,
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            print("has error");
-            return new Text('Error: ${snapshot.error}');
-          } else {
-            return createListView(context, snapshot);
-          }
-        });
+      future: _entries,
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          print("has error");
+          return new Text('Error: ${snapshot.error}');
+        } else {
+          return createListView(context, snapshot);
+        }
+      },
+    );
+
     return Column(
       children: <Widget>[
         Flexible(
@@ -182,6 +185,7 @@ class JournalScreenState extends State<JournalScreen> {
 
   createListView(BuildContext context, AsyncSnapshot snapshot) {
     List<Journal> _entries = snapshot.data;
+
     return new ListView.builder(
       itemCount: _entries.length,
       itemBuilder: (context, int index) {
@@ -248,62 +252,70 @@ class Journal extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          Container(
-            // .. date and time box
-            padding: EdgeInsets.all(7.0),
-            decoration: BoxDecoration(
-              color: Theme.of(context).buttonColor,
-              border: Border.all(
-                color: Theme.of(context).buttonColor,
-              ),
-              borderRadius: BorderRadius.circular(7),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black,
-                  blurRadius: 1.0,
-                  offset: Offset(.2, .2),
-                ),
-              ],
-            ),
-            alignment: Alignment.center,
-            margin: EdgeInsets.only(right: 15.0),
-            child: Text(
-              "$date\n$time",
-              style: TextStyle(
-                fontFamily: 'Montserrat',
-              ),
-            ), // .. date of entry will be implemented here
-          ),
-          Container(
-            // .. entry text box
-            width: MediaQuery.of(context).size.width - 100,
-            padding: EdgeInsets.all(15.0),
-            alignment: Alignment.centerLeft,
-            decoration: BoxDecoration(
-              color: Theme.of(context).buttonColor,
-              border: Border.all(
-                color: Theme.of(context).buttonColor,
-              ),
-              borderRadius: BorderRadius.circular(7),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.black,
-                  blurRadius: 1.0,
-                  offset: Offset(.2, .2),
-                ),
-              ],
-            ),
-            child: Text(
-              body,
-              style: TextStyle(
-                fontFamily: 'Montserrat',
-              ),
-            ),
-          ),
+          _dateTimeWidget(context, date, time),
+          _entryWidget(context, body),
         ],
       ),
     );
   }
+}
+
+Widget _dateTimeWidget(BuildContext context, String date, String time) {
+  return Container(
+    // .. date and time box
+    padding: EdgeInsets.all(7.0),
+    decoration: BoxDecoration(
+      color: Theme.of(context).buttonColor,
+      border: Border.all(
+        color: Theme.of(context).buttonColor,
+      ),
+      borderRadius: BorderRadius.circular(7),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black,
+          blurRadius: 1.0,
+          offset: Offset(.2, .2),
+        ),
+      ],
+    ),
+    alignment: Alignment.center,
+    margin: EdgeInsets.only(right: 15.0),
+    child: Text(
+      "$date\n$time",
+      style: TextStyle(
+        fontFamily: 'Montserrat',
+      ),
+    ), // .. date of entry will be implemented here
+  );
+}
+
+Widget _entryWidget(BuildContext context, String body) {
+  return Container(
+    // .. entry text box
+    width: MediaQuery.of(context).size.width - 100,
+    padding: EdgeInsets.all(15.0),
+    alignment: Alignment.centerLeft,
+    decoration: BoxDecoration(
+      color: Theme.of(context).buttonColor,
+      border: Border.all(
+        color: Theme.of(context).buttonColor,
+      ),
+      borderRadius: BorderRadius.circular(7),
+      boxShadow: [
+        BoxShadow(
+          color: Colors.black,
+          blurRadius: 1.0,
+          offset: Offset(.2, .2),
+        ),
+      ],
+    ),
+    child: Text(
+      body,
+      style: TextStyle(
+        fontFamily: 'Montserrat',
+      ),
+    ),
+  );
 }
 
 /*
