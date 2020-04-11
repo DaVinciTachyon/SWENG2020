@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 3c66ba908542098d80aa253fd29e7b728a91d4a4
 import 'package:flutter_test/flutter_test.dart';
 import 'package:goals/journal/journal.dart';
 import 'package:sqflite_common_ffi/sqflite_ffi.dart';
@@ -88,6 +91,7 @@ Widget createWidgetForTesting({Widget child}){
 //        journalScreenState.handleSubmission(
 //            "test input"); //note: this required removing _ from handleSubmission
 //      });
+<<<<<<< HEAD
 =======
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
@@ -156,14 +160,20 @@ void main() {
 //
 //    });
 >>>>>>> added test file for Journal entries with some basic tests to begin with
+=======
+>>>>>>> 3c66ba908542098d80aa253fd29e7b728a91d4a4
 //    test("testing readData", () {
 //        JournalScreenState journalScreenState = JournalScreenState();
 //        journalScreenState.readData();
 //        expect(false, journalScreenState.content.isEmpty);
 //      });
 <<<<<<< HEAD
+<<<<<<< HEAD
 //    });
 =======
 //  });
 }
 >>>>>>> added test file for Journal entries with some basic tests to begin with
+=======
+//    });
+>>>>>>> 3c66ba908542098d80aa253fd29e7b728a91d4a4
