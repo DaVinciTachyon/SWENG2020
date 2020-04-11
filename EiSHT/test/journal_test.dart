@@ -1,4 +1,3 @@
-
 import 'package:flutter_test/flutter_test.dart';
 import 'package:goals/journal/journal.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +68,6 @@ Widget createWidgetForTesting({Widget child}){
 ////      expect(await db.getVersion(), 0);
 ////      await db.close();
 ////    });
-
 //      test("testing handleSubmission", () async {
 ////      var db = await databaseFactoryFfi.openDatabase('journal_db');
 ////      expect(await db.getVersion(), 0);
