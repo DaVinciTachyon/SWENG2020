@@ -20,7 +20,7 @@ class JournalPageState extends State<JournalPage> {
         elevation: 0.0,
         backgroundColor: Theme.of(context).primaryColor,
         title: Text(
-          "Journal Page",
+          "Text Journal",
           style: TextStyle(
             color: Colors.white,
             fontFamily: 'Montserrat',
@@ -200,7 +200,6 @@ class JournalScreenState extends State<JournalScreen> {
             Scaffold.of(context).showSnackBar(
               SnackBar(
                 // .. delete message
-
                 content: Text("ENTRY REMOVED"),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(20),
@@ -208,12 +207,6 @@ class JournalScreenState extends State<JournalScreen> {
                 backgroundColor: Color.fromRGBO(0, 0, 0, 0.65),
                 elevation: 0,
                 behavior: SnackBarBehavior.floating,
-                // action: SnackBarAction(
-                //   label: "UNDO",
-                //   onPressed: () {
-                //     // .. undo function needs to be implemented
-                //   },
-                // ),
               ),
             );
           },
@@ -294,7 +287,7 @@ Widget _dateTimeWidget(BuildContext context, String date, String time) {
 Widget _entryWidget(BuildContext context, String body) {
   return Container(
     // .. entry text box
-    width: MediaQuery.of(context).size.width - 100,
+    width: MediaQuery.of(context).size.width - 105,
     padding: EdgeInsets.all(15.5),
     margin: EdgeInsets.only(right: 15.0),
     alignment: Alignment.centerLeft,

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import '../goals/goal_setting.dart';
 import '../journal/journal.dart';
-
+import '../audioRecorder/audioPage.dart';
 class MainNav extends StatelessWidget {
   final double buttonHeight = 100;
 
@@ -57,7 +57,7 @@ class MainNav extends StatelessWidget {
           ),
           _button(context, GoalSetting(), buttonHeight, "Goals"),
           _button(context, JournalPage(), buttonHeight, "Text Journal"),
-          _button(context, null, buttonHeight, "Audio Journal"),
+          _button(context, AudioPage(), buttonHeight, "Audio Journal"),
           // .. TODO: replace "null" with audio entries page when built
         ],
       ),
