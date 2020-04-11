@@ -252,7 +252,9 @@ class Journal extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
-          _dateTimeWidget(context, date, time),
+          Flexible(
+            child: _dateTimeWidget(context, date, time),
+          ),
           _entryWidget(context, body),
         ],
       ),
