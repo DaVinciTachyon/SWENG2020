@@ -26,7 +26,6 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
   List<ANewGoal> goals = List();
-
   @override
   Widget _goalWidget(ANewGoal makeGoal) {
     return Container(
@@ -248,7 +247,8 @@ class _DetailsPageState extends State<DetailsPage> {
                           fontSize: 40.0,
                         ),
                       ),
-                      SizedBox(width: 80.0),
+                      SizedBox(width: (MediaQuery.of(context).size.width)/2 -150),
+
                       InkWell(
                         onTap: () async {
                           ANewGoal newGoal = await Navigator.of(context).push(
