@@ -295,7 +295,8 @@ Widget _entryWidget(BuildContext context, String body) {
   return Container(
     // .. entry text box
     width: MediaQuery.of(context).size.width - 100,
-    padding: EdgeInsets.all(15.0),
+    padding: EdgeInsets.all(15.5),
+    margin: EdgeInsets.only(right: 15.0),
     alignment: Alignment.centerLeft,
     decoration: BoxDecoration(
       color: Theme.of(context).buttonColor,
