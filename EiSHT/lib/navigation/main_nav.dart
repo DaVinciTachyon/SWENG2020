@@ -13,7 +13,6 @@ class MainNav extends StatelessWidget {
         children: <Widget>[
           Container(
             width: double.infinity,
-            //height: 490,
             height: (MediaQuery.of(context).size.height) -
                 buttonHeight -
                 buttonHeight -
@@ -32,28 +31,10 @@ class MainNav extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    FlatButton(
-                      // padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
-                      shape: new CircleBorder(),
-                      // color: Colors.white,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular((75 / 2)),
-
-                        child: Image(
-                            image: AssetImage('images/logo-ed.png'),
-                            fit: BoxFit.cover,
-                            height: 70,
-                            width: 70),
-                        //icon: Image.asset('images/logo.jpg'),
-                        // icon: Image.asset('037-fame.png'),
-                      ),
-
-                      onPressed: () {},
-                    ),
+                    _logo(),
                   ],
                 ),
                 RichText(
-                  //  textAlign: TextAlign.center,
                   text: TextSpan(children: <TextSpan>[
                     TextSpan(
                       text: "Welcome to",
@@ -84,7 +65,23 @@ class MainNav extends StatelessWidget {
   }
 }
 
-Widget _button(BuildContext context, Widget dest, double height, String text) {
+Widget _logo() {
+  return FlatButton(
+    shape: new CircleBorder(),
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular((75 / 2)),
+      child: Image(
+        image: AssetImage('images/logo-ed.png'),
+        fit: BoxFit.cover,
+        height: 70,
+        width: 70,
+      ),
+    ),
+    onPressed: () {},
+  );
+}
+
+Widget _button(BuildContext context, Widget destPage, double height, String text) {
   return Container(
     width: double.infinity,
     height: height,
@@ -109,7 +106,7 @@ Widget _button(BuildContext context, Widget dest, double height, String text) {
           context,
           MaterialPageRoute<bool>(
             builder: (BuildContext context) {
-              return dest;
+              return destPage;
             },
           ),
         );
