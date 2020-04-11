@@ -87,14 +87,7 @@ Widget createWidgetForTesting({Widget child}){
 //      });
 //    test("testing readData", () {
 //        JournalScreenState journalScreenState = JournalScreenState();
-<<<<<<< HEAD
 //        journalScreenState.handleSubmission(
 //            "test input"); //note: this required removing _ from handleSubmission
 //      });
 //    });
-=======
-//        journalScreenState.readData();
-//        expect(false, journalScreenState.content.isEmpty);
-//      });
-//    });
->>>>>>> 74f0daf4de84978c1365f138ca6660db475e4996
