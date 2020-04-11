@@ -25,7 +25,7 @@ class _CreateGoalState extends State<CreateGoal> {
   Widget build(BuildContext context) {
 
 
-    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
     Widget _buildNewGoalName() {
       return TextFormField(

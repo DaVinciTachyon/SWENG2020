@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
 import '../goals/goal_setting.dart';
 import '../journal/journal.dart';
-
+import '../audioRecorder/audioPage.dart';
 class MainNav extends StatelessWidget {
   final int buttonHeight=150;
   @override
@@ -53,7 +53,14 @@ class MainNav extends StatelessWidget {
 
 
                       onPressed: (){
-
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute<bool>(
+                            builder: (BuildContext context) {
+                              return AudioPage();
+                            },
+                          ),
+                        );
                       },
                     ),
                   ],
