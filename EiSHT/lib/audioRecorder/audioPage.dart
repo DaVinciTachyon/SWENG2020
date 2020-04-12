@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 
@@ -10,8 +9,7 @@ import 'package:audio_recorder/audio_recorder.dart';
 
 import 'package:path_provider/path_provider.dart';
 
-import 'audio_file_list_tile.dart';
-
+import 'package:EiSHT/audioRecorder/audio_file_list_tile.dart';
 
 class AudioPage extends StatefulWidget {
   @override
@@ -66,21 +64,21 @@ class JournalScreenState extends State<JournalScreen> {
 
   String tempFilename = "TempRecording"; //Filename without path or extension
 
-
   _showSaveDialog() async {
     // Note: SaveDialog should return a File or null when calling Navigator.pop()
     // Catch this return value and update the state of the ListTile if the File has been renamed
     File newFile = await showDialog(
         context: context,
-        builder: (context) => SaveDialog(defaultAudioFile: defaultAudioFile,)
-    );
+        builder: (context) => SaveDialog(
+              defaultAudioFile: defaultAudioFile,
+            ));
 
-    if( newFile != null){
+    if (newFile != null) {
       String basename = p.basename(newFile.path);
-      Scaffold
-          .of(context)
-          .showSnackBar(new SnackBar(content: new Text("Saved file $basename"),
-        duration: Duration(milliseconds: 1400), ));
+      Scaffold.of(context).showSnackBar(new SnackBar(
+        content: new Text("Saved file $basename"),
+        duration: Duration(milliseconds: 1400),
+      ));
 
       setState(() {
         //Reset the page, and get rid of the buttons
@@ -89,45 +87,39 @@ class JournalScreenState extends State<JournalScreen> {
       });
     }
   }
+
   Widget _textComposer() {
-
-
     // .. user input
     return Container(
       color: Colors.grey[200],
-
       child: Container(
-        margin: EdgeInsets.fromLTRB(0,10,0,0), // .. t
+        margin: EdgeInsets.fromLTRB(0, 10, 0, 0), // .. t
         color: Theme.of(context).buttonColor,
-        child:Row(
-        children: <Widget>[
-          Expanded(
-        child:  Container(
-alignment: Alignment.bottomRight,
-            color: Theme.of(context).buttonColor,
-            margin: EdgeInsets.symmetric(horizontal: 10.0),
+        child: Row(
+          children: <Widget>[
+            Expanded(
+              child: Container(
+                alignment: Alignment.bottomRight,
+                color: Theme.of(context).buttonColor,
+                margin: EdgeInsets.symmetric(horizontal: 10.0),
+                child: IconButton(
 
-            child: IconButton(
-
-              // .. save entry
-              icon: Icon(Icons.add_circle_outline),
-              iconSize: 50.0,
-              color: Theme.of(context).primaryColor,
-              onPressed: () => {
-                if (_isRecording==true){
-                  stopRecording()
-                }
-                else{
-            startRecording()
-            }}
+                    // .. save entry
+                    icon: Icon(Icons.add_circle_outline),
+                    iconSize: 50.0,
+                    color: Theme.of(context).primaryColor,
+                    onPressed: () => {
+                          if (_isRecording == true)
+                            {stopRecording()}
+                          else
+                            {startRecording()}
+                        }),
+              ),
             ),
-          ),
-          ),
-        ],
-      ),
+          ],
+        ),
       ),
     );
-
   }
 
   stopRecording() async {
@@ -143,7 +135,7 @@ alignment: Alignment.bottomRight,
       //Tells flutter to rerun the build method
       _isRecording = isRecording;
       _doQuerySave = true;
-      defaultAudioFile = File(p.join(docDir.path, this.tempFilename+'.m4a'));
+      defaultAudioFile = File(p.join(docDir.path, this.tempFilename + '.m4a'));
     });
     _showSaveDialog();
   }
@@ -154,12 +146,12 @@ alignment: Alignment.bottomRight,
       //Directory docDir = await storage.docDir;
       Directory docDir = await getApplicationDocumentsDirectory();
       String newFilePath = p.join(docDir.path, this.tempFilename);
-      File tempAudioFile = File(newFilePath+'.m4a');
-      Scaffold
-          .of(context)
-          .showSnackBar(new SnackBar(content: new Text("Recording."),
-        duration: Duration(milliseconds: 1400), ));
-      if (await tempAudioFile.exists()){
+      File tempAudioFile = File(newFilePath + '.m4a');
+      Scaffold.of(context).showSnackBar(new SnackBar(
+        content: new Text("Recording."),
+        duration: Duration(milliseconds: 1400),
+      ));
+      if (await tempAudioFile.exists()) {
         await tempAudioFile.delete();
       }
       if (await AudioRecorder.hasPermissions) {
@@ -181,7 +173,6 @@ alignment: Alignment.bottomRight,
     }
   }
 
-
   ListView createFileListView(BuildContext context, AsyncSnapshot snapshot) {
     Directory docDir = snapshot.data;
     //Filter out all m4a files
@@ -189,8 +180,10 @@ alignment: Alignment.bottomRight,
     List<FileSystemEntity> dirFiles = docDir.listSync();
 
     // Glob audio files that are not the temp file.
-    List<FileSystemEntity> m4aFiles =
-    dirFiles.where((file) => (file.path.endsWith('.m4a') && file.path.split('/').last != 'TempRecording.m4a' )).toList();
+    List<FileSystemEntity> m4aFiles = dirFiles
+        .where((file) => (file.path.endsWith('.m4a') &&
+            file.path.split('/').last != 'TempRecording.m4a'))
+        .toList();
 
     //Glob has a bug!!!
     //final audioFilesGlob = new Glob(p.join(docDir,"*"));
@@ -201,7 +194,6 @@ alignment: Alignment.bottomRight,
     List<Widget> audioFileTiles = new List();
 
     for (FileSystemEntity file in m4aFiles) {
-
       //String nameroot = pathStr.split('/').last;
 
       if (file.path.endsWith('.m4a')) {
@@ -209,7 +201,7 @@ alignment: Alignment.bottomRight,
       }
     }
 
-    return ListView(children:audioFileTiles);
+    return ListView(children: audioFileTiles);
   }
 
   @override
@@ -229,17 +221,13 @@ alignment: Alignment.bottomRight,
         Flexible(
           child: futureBuilders,
         ),
-
         Container(
-
           child: _textComposer(),
         ),
       ],
     );
   }
 }
-
-
 
 /*
 To Do Yet:

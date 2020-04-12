@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'save_dialog.dart';
-import 'audio_play_bar.dart';
+import 'package:EiSHT/audioRecorder/save_dialog.dart';
+import 'package:EiSHT/audioRecorder/audio_play_bar.dart';
 
 class AudioFileListTile extends StatefulWidget {
   final FileSystemEntity file;
@@ -20,24 +20,19 @@ class AudioFileListTileState extends State<AudioFileListTile> {
   String fileDate;
   String fileName;
 
-
-
-
   @override
   AudioFileListTileState(FileSystemEntity file) {
     this.file = file;
     initFileAttributes();
-
   }
 
-  initFileAttributes(){
+  initFileAttributes() {
     // Init some convenience variables
     this.filePath = file.path;
     this.fileName = this.filePath.split("/").last.split('.').first;
-    print("New "+fileName);
+    print("New " + fileName);
     print(file.path);
   }
-
 
   _deleteFile(File file) {
     // Delete a file and rebuild this widget parent!
@@ -64,37 +59,33 @@ class AudioFileListTileState extends State<AudioFileListTile> {
         ]);
   }
 
-
   _saveDialogBuilder(BuildContext context) {
     SaveDialog sDialog = SaveDialog(
         defaultAudioFile: file,
         dialogText: "Rename $fileName",
         doLookupLargestIndex: false);
     return sDialog;
-
   }
 
   _showSaveDialog() async {
-
     // Note: SaveDialog should return a File or null when calling Navigator.pop()
     // Catch this return value and update the state of the ListTile if the File has been renamed
     // Useful info on making Dialogs that update parents: https://stackoverflow.com/questions/49706046/
-    File newFile= await showDialog(
+    File newFile = await showDialog(
         context: context,
-        builder: (context) => _saveDialogBuilder(context) //weird (context> => SaveDialog(..)
-    ); // note perhaps only showdialog should be asynced
+        builder: (context) =>
+            _saveDialogBuilder(context) //weird (context> => SaveDialog(..)
+        ); // note perhaps only showdialog should be asynced
 
     // The return type is actually a File due to the navigator pop statement!
     //debugger(message:"hello");
     // Update the ListTile filename once the dialog is closed
 
-    setState((){
-      file=newFile;
+    setState(() {
+      file = newFile;
       initFileAttributes();
     });
-
   }
-
 
   Row createTrailingButtons() {
     // Note: https://stackoverflow.com/questions/44656013
@@ -116,35 +107,34 @@ class AudioFileListTileState extends State<AudioFileListTile> {
             padding: EdgeInsets.zero,
             onSelected: (value) {},
             itemBuilder: (BuildContext context) => <PopupMenuEntry<String>>[
-              PopupMenuItem<String>(
-                  value: 'Rename',
-                  child: ListTile(
-                      leading: Icon(Icons.redo),
-                      title: Text('Rename'),
-                      onTap: (){
-                        Navigator.pop(context); // closes PopMenu when finished?
-                        _showSaveDialog();
-                        setState((){});
-                      }
-                  )),
+                  PopupMenuItem<String>(
+                      value: 'Rename',
+                      child: ListTile(
+                          leading: Icon(Icons.redo),
+                          title: Text('Rename'),
+                          onTap: () {
+                            Navigator.pop(
+                                context); // closes PopMenu when finished?
+                            _showSaveDialog();
+                            setState(() {});
+                          })),
 
-              PopupMenuDivider(), // ignore: list_element_type_not_assignable, https://github.com/flutter/flutter/issues/5771
-              PopupMenuItem<String>(
-                  value: 'Delete',
-                  child: ListTile(
-                    leading: Icon(Icons.delete),
-                    title: Text('Delete'),
-                    onTap: () {
-                      Navigator.pop(context);
-                      showDialog(
-                        context: context,
-                        builder: (_) => _openQueryDeleteDialog(),
-                      );
-                      setState((){});
-
-                    },
-                  ))
-            ])
+                  PopupMenuDivider(), // ignore: list_element_type_not_assignable, https://github.com/flutter/flutter/issues/5771
+                  PopupMenuItem<String>(
+                      value: 'Delete',
+                      child: ListTile(
+                        leading: Icon(Icons.delete),
+                        title: Text('Delete'),
+                        onTap: () {
+                          Navigator.pop(context);
+                          showDialog(
+                            context: context,
+                            builder: (_) => _openQueryDeleteDialog(),
+                          );
+                          setState(() {});
+                        },
+                      ))
+                ])
         /*
         IconButton(
           icon: new Icon(Icons.create),
@@ -173,7 +163,6 @@ class AudioFileListTileState extends State<AudioFileListTile> {
               builder: (BuildContext context) {
                 return AudioPlayBar(file: file);
               });
-
         });
   }
 }

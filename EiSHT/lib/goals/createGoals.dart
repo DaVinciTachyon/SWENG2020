@@ -2,13 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
 import 'detailsPage.dart';
-import 'ANewGoal.dart';
+import 'package:EiSHT/goals/ANewGoal.dart';
 
 class CreateGoal extends StatefulWidget {
   final goalType;
   final imageSizeForTop;
-
-
 
   CreateGoal({this.goalType, this.imageSizeForTop});
   @override
@@ -21,58 +19,53 @@ class _CreateGoalState extends State<CreateGoal> {
   String _newGoalDescription;
 
   @override
-
   Widget build(BuildContext context) {
-
-
-     final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+    final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
     Widget _buildNewGoalName() {
       return TextFormField(
-        decoration : InputDecoration(labelText: 'New Goal Name'),
-        validator: (String value){
-          if(value.isEmpty){
+        decoration: InputDecoration(labelText: 'New Goal Name'),
+        validator: (String value) {
+          if (value.isEmpty) {
             return 'Goal name is required.';
           }
           return null;
         },
-        onSaved: (String value){
+        onSaved: (String value) {
           _newGoalName = value;
         },
       );
-
     }
-    Widget  _buildMiniGoal() {
+
+    Widget _buildMiniGoal() {
       return TextFormField(
-        decoration : InputDecoration(labelText: 'Mini daily goal'),
-        validator: (String value){
-          if(value.isEmpty){
+        decoration: InputDecoration(labelText: 'Mini daily goal'),
+        validator: (String value) {
+          if (value.isEmpty) {
             return 'Mini daily goal is required.';
           }
           return null;
         },
-        onSaved: (String value){
+        onSaved: (String value) {
           _miniGoal = value;
         },
       );
-
     }
-    Widget _buildNewGoalDescription(){
+
+    Widget _buildNewGoalDescription() {
       return TextFormField(
-      decoration : InputDecoration(labelText: 'Goal Description'),
-      validator: (String value){
-        if(value.isEmpty){
-          return 'Goal discription is required.';
-        }
-        return null;
-      },
-      onSaved: (String value){
-        _newGoalDescription = value;
-      },
-    );
+        decoration: InputDecoration(labelText: 'Goal Description'),
+        validator: (String value) {
+          if (value.isEmpty) {
+            return 'Goal discription is required.';
+          }
+          return null;
+        },
+        onSaved: (String value) {
+          _newGoalDescription = value;
+        },
+      );
     }
-
-
 
     return Scaffold(
       backgroundColor: Colors.orange,
@@ -102,7 +95,8 @@ class _CreateGoalState extends State<CreateGoal> {
           ),
         ],
       ),
-      body: ListView(children: [
+      body: ListView(
+        children: [
           Stack(
             children: [
               Container(
@@ -123,43 +117,38 @@ class _CreateGoalState extends State<CreateGoal> {
                   width: widget.imageSizeForTop.width,
                 ),
               ),
-
               Container(
                 padding: EdgeInsets.fromLTRB(0, 150, 0, 0),
                 margin: EdgeInsets.all(24.0),
                 child: Form(
-                  key:_formKey,
+                  key: _formKey,
                   child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children:<Widget>[
-                    _buildNewGoalName(),
-                    _buildMiniGoal(),
-                    _buildNewGoalDescription(),
-
-
-                    RaisedButton(
-                      child: Text(
-                      'Add New Goal', style: TextStyle(
-                      color: Colors.orange,
-                      fontSize: 20,
-                    ),
-                    ),
-                      onPressed: () {
-                      if (_formKey.currentState.validate() )
-                      {
-                        _formKey.currentState.save();
-                        ANewGoal _theGoal =new ANewGoal(_newGoalName, _miniGoal,_newGoalDescription );
-                        Navigator.pop(context,_theGoal);
-                       }
-
-                    },
-                    ),
-                  ],
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      _buildNewGoalName(),
+                      _buildMiniGoal(),
+                      _buildNewGoalDescription(),
+                      RaisedButton(
+                        child: Text(
+                          'Add New Goal',
+                          style: TextStyle(
+                            color: Colors.orange,
+                            fontSize: 20,
+                          ),
+                        ),
+                        onPressed: () {
+                          if (_formKey.currentState.validate()) {
+                            _formKey.currentState.save();
+                            ANewGoal _theGoal = new ANewGoal(
+                                _newGoalName, _miniGoal, _newGoalDescription);
+                            Navigator.pop(context, _theGoal);
+                          }
+                        },
+                      ),
+                    ],
+                  ),
                 ),
-                ),
-
               ),
-
             ],
           ),
         ],
@@ -167,5 +156,3 @@ class _CreateGoalState extends State<CreateGoal> {
     );
   }
 }
-
-
