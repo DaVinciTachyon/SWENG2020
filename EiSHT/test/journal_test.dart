@@ -1,5 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
-import 'package:goals/journal/journal.dart';
+import 'package:EiSHT/journal/journal.dart';
 import 'package:flutter/material.dart';
 
 

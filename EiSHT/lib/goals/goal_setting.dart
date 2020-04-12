@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'detailsPage.dart';
-import 'ANewGoal.dart';
+import 'package:EiSHT/goals/detailsPage.dart';
+import 'package:EiSHT/goals/ANewGoal.dart';
 
 class GoalSetting extends StatefulWidget {
   @override

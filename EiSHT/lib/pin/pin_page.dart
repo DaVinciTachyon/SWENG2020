@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 //import '../goals/goal_setting.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../navigation/main_nav.dart';
+import 'package:EiSHT/navigation/main_nav.dart';
 
 class MyHomePage extends StatefulWidget {
   MyHomePage({Key key, this.title}) : super(key: key);

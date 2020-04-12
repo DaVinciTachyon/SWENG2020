@@ -1,4 +1,4 @@
-import '../repository/model.dart';
+import 'package:EiSHT/repository/model.dart';
 
 class Journal {
   int id;

@@ -1,8 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
-import '../goals/goal_setting.dart';
-import '../journal/journal.dart';
-import '../audioRecorder/audioPage.dart';
+import 'package:EiSHT/goals/goal_setting.dart';
+import 'package:EiSHT/journal/journal.dart';
+import 'package:EiSHT/audioRecorder/audioPage.dart';
+
 class MainNav extends StatelessWidget {
   final double buttonHeight = 100;
 
