@@ -1,5 +1,5 @@
-import '../repository/model.dart';
-import '../repository/repo_service_journal.dart';
+import 'package:EiSHT/repository/model.dart';
+import 'package:EiSHT/repository/repo_service_journal.dart';
 import 'package:flutter/material.dart';
 
 class JournalPage extends StatefulWidget {

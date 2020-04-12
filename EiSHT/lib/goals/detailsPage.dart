@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'createGoals.dart';
-import 'ANewGoal.dart';
+import 'package:EiSHT/goals/createGoals.dart';
+import 'package:EiSHT/goals/ANewGoal.dart';
 
 class DetailsPage extends StatefulWidget {
   final heroTag;
@@ -247,8 +247,8 @@ class _DetailsPageState extends State<DetailsPage> {
                           fontSize: 40.0,
                         ),
                       ),
-                      SizedBox(width: (MediaQuery.of(context).size.width)/2 -150),
-
+                      SizedBox(
+                          width: (MediaQuery.of(context).size.width) / 2 - 150),
                       InkWell(
                         onTap: () async {
                           ANewGoal newGoal = await Navigator.of(context).push(
