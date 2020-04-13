@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:permission_handler/permission_handler.dart';
 
 import 'save_dialog.dart';
 
@@ -29,7 +28,7 @@ class AudioPageState extends State<AudioPage> {
         elevation: 0.0,
         backgroundColor: Theme.of(context).primaryColor,
         title: Text(
-          "Journal Page",
+          "Audio Journal",
           style: TextStyle(
             color: Colors.white,
             fontFamily: 'Montserrat',
@@ -37,25 +36,24 @@ class AudioPageState extends State<AudioPage> {
           ),
         ),
       ),
-      body: JournalScreen(),
+      body: AudioScreen(),
     );
   }
 }
 
-class JournalScreen extends StatefulWidget {
+class AudioScreen extends StatefulWidget {
   @override
-  State createState() => JournalScreenState();
+  State createState() => AudioScreenState();
 }
 
-class JournalScreenState extends State<JournalScreen> {
-  final TextEditingController _textController = new TextEditingController();
+class AudioScreenState extends State<AudioScreen> {
   String body;
   String time;
   int id;
   int count;
   String date;
   String content;
-  @override
+  //@override
   Recording _recording;
   File defaultAudioFile;
 
@@ -88,43 +86,21 @@ class JournalScreenState extends State<JournalScreen> {
     }
   }
 
-  Widget _textComposer() {
+  Widget _audioComposer() {
     // .. user input
-    return Container(
-      color: Colors.grey[200],
-      child: Container(
-        margin: EdgeInsets.fromLTRB(0, 10, 0, 0), // .. t
-        color: Theme.of(context).buttonColor,
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Container(
-                alignment: Alignment.bottomRight,
-                color: Theme.of(context).buttonColor,
-                margin: EdgeInsets.symmetric(horizontal: 10.0),
-                child: IconButton(
-
-                    // .. save entry
-                    icon: Icon(Icons.add_circle_outline),
-                    iconSize: 50.0,
-                    color: Theme.of(context).primaryColor,
-                    onPressed: () => {
-                          if (_isRecording == true)
-                            {stopRecording()}
-                          else
-                            {startRecording()}
-                        }),
-              ),
-            ),
-          ],
-        ),
-      ),
+    return FloatingActionButton(
+      // .. save entry
+      child: Icon(_isRecording ? Icons.stop : Icons.add),
+      backgroundColor: Theme.of(context).primaryColor,
+      onPressed: () => {
+        if (_isRecording == true) {stopRecording()} else {startRecording()}
+      },
     );
   }
 
   stopRecording() async {
     // Await return of Recording object
-    var recording = await AudioRecorder.stop();
+    //var recording = await AudioRecorder.stop();
     bool isRecording = await AudioRecorder.isRecording;
 
     //final storage = SharedAudioContext.of(context).storage;
@@ -147,19 +123,36 @@ class JournalScreenState extends State<JournalScreen> {
       Directory docDir = await getApplicationDocumentsDirectory();
       String newFilePath = p.join(docDir.path, this.tempFilename);
       File tempAudioFile = File(newFilePath + '.m4a');
-      Scaffold.of(context).showSnackBar(new SnackBar(
-        content: new Text("Recording."),
-        duration: Duration(milliseconds: 1400),
-      ));
       if (await tempAudioFile.exists()) {
         await tempAudioFile.delete();
       }
       if (await AudioRecorder.hasPermissions) {
         await AudioRecorder.start(
-            path: newFilePath, audioOutputFormat: AudioOutputFormat.AAC);
-      } else {
+          path: newFilePath,
+          audioOutputFormat: AudioOutputFormat.AAC,
+        );
         Scaffold.of(context).showSnackBar(new SnackBar(
-            content: new Text("Error! Audio recorder lacks permissions.")));
+          content: new Text("Recording."),
+          duration: Duration(milliseconds: 1400),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+          ),
+          backgroundColor: Color.fromRGBO(0, 0, 0, 0.65),
+          elevation: 0,
+          behavior: SnackBarBehavior.floating,
+        ));
+      } else {
+        Scaffold.of(context).showSnackBar(
+          new SnackBar(
+            content: new Text("Error! Audio recorder lacks permissions."),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            backgroundColor: Color.fromRGBO(0, 0, 0, 0.65),
+            elevation: 0,
+            behavior: SnackBarBehavior.floating,
+          ),
+        );
       }
       bool isRecording = await AudioRecorder.isRecording;
       setState(() {
@@ -207,34 +200,27 @@ class JournalScreenState extends State<JournalScreen> {
   @override
   Widget build(BuildContext context) {
     var futureBuilders = new FutureBuilder(
-        future: getApplicationDocumentsDirectory(),
-        builder: (context, snapshot) {
-          if (snapshot.hasError) {
-            print("has error");
-            return new Text('Error: ${snapshot.error}');
-          } else {
-            return createFileListView(context, snapshot);
-          }
-        });
+      future: getApplicationDocumentsDirectory(),
+      builder: (context, snapshot) {
+        if (snapshot.hasError) {
+          print("has error");
+          return new Text('Error: ${snapshot.error}');
+        } else {
+          return createFileListView(context, snapshot);
+        }
+      },
+    );
     return Column(
       children: <Widget>[
         Flexible(
           child: futureBuilders,
         ),
         Container(
-          child: _textComposer(),
+          alignment: Alignment(1.0, 1.0),
+          padding: EdgeInsets.all(15.0),
+          child: _audioComposer(),
         ),
       ],
     );
   }
 }
-
-/*
-To Do Yet:
-implement date into every journal entry                   (✔)
-make entries look better                                  (✔)
-swipe to delete an entry                                  (✔)
-add undo deletion functionality                           ()
-note saying swipe to delete after one entry               ()
-keep entries when exited the app                          (✔)
-*/
