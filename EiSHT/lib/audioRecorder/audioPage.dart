@@ -125,7 +125,12 @@ class AudioScreenState extends State<AudioScreen> {
       File tempAudioFile = File(newFilePath + '.m4a');
       if (await tempAudioFile.exists()) {
         await tempAudioFile.delete();
-
+      }
+      if (await AudioRecorder.hasPermissions) {
+        await AudioRecorder.start(
+          path: newFilePath,
+          audioOutputFormat: AudioOutputFormat.AAC,
+        );
         Scaffold.of(context).showSnackBar(new SnackBar(
           content: new Text("Recording."),
           duration: Duration(milliseconds: 1400),
@@ -136,10 +141,6 @@ class AudioScreenState extends State<AudioScreen> {
           elevation: 0,
           behavior: SnackBarBehavior.floating,
         ));
-      }
-      if (await AudioRecorder.hasPermissions) {
-        await AudioRecorder.start(
-            path: newFilePath, audioOutputFormat: AudioOutputFormat.AAC);
       } else {
         Scaffold.of(context).showSnackBar(
           new SnackBar(
