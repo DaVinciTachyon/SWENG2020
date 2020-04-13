@@ -8,7 +8,7 @@ import 'package:audio_recorder/audio_recorder.dart';
 
 import 'package:path_provider/path_provider.dart';
 
-import 'audio_file_list_tile.dart';
+import 'package:EiSHT/audioRecorder/audio_file_list_tile.dart';
 
 class AudioPage extends StatefulWidget {
   @override
