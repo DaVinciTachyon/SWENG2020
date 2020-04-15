@@ -20,11 +20,9 @@ class _CreateGoalState extends State<CreateGoal> {
   DateTime _date = DateTime.now();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-
-
   @override
   Widget build(BuildContext context) {
-
+    //// Keep
     Future<Null> selectDate(BuildContext context) async {
       DateTime picked = await showDatePicker(
           context: context,
@@ -34,7 +32,7 @@ class _CreateGoalState extends State<CreateGoal> {
       if ((picked != null) && (picked != _date)) {
         print(_date.toString());
         setState(
-              () {
+          () {
             _date = picked;
             print(_date.toString());
           },
@@ -74,8 +72,8 @@ class _CreateGoalState extends State<CreateGoal> {
 
     Widget _buildNewGoalDescription() {
       return TextFormField(
-        decoration: InputDecoration(labelText: 'Why do you want to achieve this goal?'),
-
+        decoration:
+            InputDecoration(labelText: 'Why do you want to achieve this goal?'),
         validator: (String value) {
           if (value.isEmpty) {
             return 'Goal discription is required.';
@@ -86,56 +84,41 @@ class _CreateGoalState extends State<CreateGoal> {
           _newGoalDescription = value;
         },
       );
-
     }
-
 
     Widget _buildDatePicker() {
       return Container(
         margin: EdgeInsets.all(0),
         padding: EdgeInsets.all(0),
-        child: Column(children: <Widget>[
-          Text('Select date you wish to complete your goal by:',
-              style: TextStyle(
-                  fontFamily: 'Monserrat',
-                  fontSize: 16.0,
-                  color: Colors.grey[600])),
-          SizedBox(height: 20),
-          Container(
-            height: 75.0,
-            width: 75,
-
-            decoration: BoxDecoration(
-              color: Colors.deepOrangeAccent,
-
-              borderRadius: BorderRadius.circular(8.0),
+        child: Column(
+          children: <Widget>[
+            Text('Select date you wish to complete your goal by:',
+                style: TextStyle(
+                    fontFamily: 'Monserrat',
+                    fontSize: 16.0,
+                    color: Colors.grey[600])),
+            SizedBox(height: 20),
+            Container(
+              height: 75.0,
+              width: 75,
+              decoration: BoxDecoration(
+                color: Colors.deepOrangeAccent,
+                borderRadius: BorderRadius.circular(8.0),
+              ),
+              child: IconButton(
+                  icon: Icon(
+                    Icons.calendar_today,
+                    size: 60,
+                    color: Colors.white,
+                  ),
+                  onPressed: () {
+                    selectDate(context);
+                  }),
             ),
-
-            child: IconButton(
-                icon: Icon(
-
-                  Icons.calendar_today,
-                  size: 60,
-                  color: Colors.white,
-                ),
-                onPressed: () {
-                  selectDate(context);
-                }
-            ),
-          ),
-        ],
+          ],
         ),
       );
     }
-
-
-
-
-
-
-
-
-
 
     return Scaffold(
       backgroundColor: Colors.deepOrangeAccent,
@@ -158,7 +141,6 @@ class _CreateGoalState extends State<CreateGoal> {
         ),
         centerTitle: true,
         actions: <Widget>[
-
           IconButton(
             icon: Icon(Icons.more_horiz),
             onPressed: () {},
@@ -199,13 +181,11 @@ class _CreateGoalState extends State<CreateGoal> {
                       _buildNewGoalName(),
                       _buildMiniGoal(),
                       _buildNewGoalDescription(),
-
                       SizedBox(height: 20),
                       _buildDatePicker(),
-
                       SizedBox(height: 10),
                       RaisedButton(
-                        shape : RoundedRectangleBorder(
+                        shape: RoundedRectangleBorder(
                           borderRadius: new BorderRadius.circular(18.0),
                           //side: BorderSide(color: Colors.red)
                         ),
@@ -213,21 +193,21 @@ class _CreateGoalState extends State<CreateGoal> {
                           'Add New Goal',
                           style: TextStyle(
                             color: Colors.deepOrangeAccent,
-
                             fontSize: 20,
                           ),
                         ),
                         onPressed: () {
-
-                          if (!_formKey.currentState.validate()&& _date==DateTime.now() ) {
+                          if (!_formKey.currentState.validate() &&
+                              _date == DateTime.now()) {
                             return;
-                          }
-                          else if(_formKey.currentState.validate()&& _date!=DateTime.now() ) {
+                          } else if (_formKey.currentState.validate() &&
+                              _date != DateTime.now()) {
                             _formKey.currentState.save();
                             ANewGoal _theGoal = new ANewGoal(_newGoalName,
                                 _miniGoal, _newGoalDescription, _date);
                             Navigator.pop(context, _theGoal);
-                          };
+                          }
+                          ;
                         },
                       ),
                     ],
@@ -235,9 +215,7 @@ class _CreateGoalState extends State<CreateGoal> {
                 ),
               ),
             ],
-
           ),
-
         ],
       ),
     );

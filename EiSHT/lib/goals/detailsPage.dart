@@ -55,6 +55,7 @@ class _DetailsPageState extends State<DetailsPage> {
   }
 
 //-----------------------------------------------------------------------------
+
   Color getColour(ANewGoal checkGoal) {
     if (checkGoal.getPercentageComplete() > 99) {
       print(checkGoal.getPercentageComplete());
@@ -168,6 +169,7 @@ class _DetailsPageState extends State<DetailsPage> {
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add, color: Colors.deepOrangeAccent),
+
         //color: Colors.deepOrangeAccent,
 
         backgroundColor: Colors.white,
@@ -179,7 +181,9 @@ class _DetailsPageState extends State<DetailsPage> {
 
           print(newGoal.goalName);
           goals.add(newGoal);
+
           // goals[0] = newGoal;
+
           setState(
             () {
               _goalWidget(goals[0]);
