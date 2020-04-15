@@ -54,6 +54,7 @@ class _DetailsPageState extends State<DetailsPage> {
       ),
     );
   }
+
 //-----------------------------------------------------------------------------
   Color getColour(ANewGoal checkGoal){
     if(checkGoal.getPercentageComplete()>99){
@@ -64,6 +65,8 @@ class _DetailsPageState extends State<DetailsPage> {
   }
 
   Widget build(BuildContext context) {
+
+
     return Scaffold(
       backgroundColor:   Colors.deepOrangeAccent,
       appBar: AppBar(
@@ -116,6 +119,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   ),
                 ),
               ),
+
               SizedBox(height : 40),
               ListView.builder(
                 scrollDirection: Axis.vertical,
@@ -140,6 +144,7 @@ class _DetailsPageState extends State<DetailsPage> {
 
                           ],
 
+
                         ),
                           onTap:(){
                             Navigator.of(context).push(MaterialPageRoute(
@@ -158,6 +163,7 @@ class _DetailsPageState extends State<DetailsPage> {
             ],
             scrollDirection: Axis.vertical,
           ),
+
         ),
       ),
       floatingActionButton: FloatingActionButton(
@@ -173,13 +179,14 @@ class _DetailsPageState extends State<DetailsPage> {
 
           print(newGoal.goalName);
           goals.add(newGoal);
-         // goals[0] = newGoal;
+
           setState(
             () {
               _goalWidget(goals[0]);
             },
           );
         },
+
       ),
     );
   }
