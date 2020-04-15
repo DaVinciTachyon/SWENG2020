@@ -12,7 +12,7 @@ class _GoalSettingState extends State<GoalSetting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFF9800),
+      backgroundColor:  Colors.deepOrangeAccent,
       body: SafeArea(
         child: ListView(
           children: <Widget>[
@@ -74,7 +74,7 @@ class _GoalSettingState extends State<GoalSetting> {
             Container(
               height: MediaQuery.of(context).size.height - 185.0,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color:  Colors.orange[50],
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(75.0)),
               ),
               child: ListView(
@@ -106,60 +106,71 @@ class _GoalSettingState extends State<GoalSetting> {
 
   Widget _buildGoalItem(String imgPath, String goalName, String price) {
     return Padding(
-      padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
-      child: InkWell(
-        onTap: () async {
-          ANewGoal makeGoal = await Navigator.of(context).push(
-              MaterialPageRoute(
-                  builder: (context) =>
-                      DetailsPage(heroTag: imgPath, goalName: goalName)));
-          // if (makeGoal != null) {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => DetailsPage(
-                  heroTag: imgPath,
-                  goalName: goalName,
-                  newGoalName: makeGoal.goalName,
-                  newMiniGoal: makeGoal.goalMini,
-                  newDescription: makeGoal.goalDescription)));
-          // }
-        },
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Container(
-              padding: EdgeInsets.only(bottom: 20),
-              child: Row(
-                children: [
-                  Hero(
-                    tag: imgPath,
-                    child: Image(
-                        image: AssetImage(imgPath),
-                        fit: BoxFit.cover,
-                        height: 75.0,
-                        width: 75.0),
-                  ),
-                  SizedBox(width: 10.0),
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        goalName,
-                        style: TextStyle(
-                          fontFamily: 'Monserrat',
-                          fontSize: 17.0,
-                          fontWeight: FontWeight.bold,
+
+        padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
+        child: InkWell(
+          onTap: ()async {
+          //  ANewGoal makeGoal =await     CHECK
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) =>
+
+                    DetailsPage(heroTag: imgPath, goalName: goalName))
+            );
+           // if(makeGoal!= null){
+            //  Navigator.of(context).push(MaterialPageRoute(
+            //      builder: (context) =>
+
+            //          DetailsPage(heroTag: imgPath, goalName: goalName, newGoalName : makeGoal.goalName,
+            //              newMiniGoal: makeGoal.goalMini, newDescription : makeGoal.goalDescription))
+          //    );
+           // }
+
+          },
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: <Widget>[
+              Container(
+                padding: EdgeInsets.only(bottom: 20),
+                child: Row(
+                  children: [
+                    Hero(
+                      tag: imgPath,
+                      child: Image(
+                          image: AssetImage(imgPath),
+                          fit: BoxFit.cover,
+                          height: 75.0,
+                          width: 75.0),
+                    ),
+                    SizedBox(width: 10.0),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          goalName,
+                          style: TextStyle(
+                            fontFamily: 'Monserrat',
+                            fontSize: 17.0,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
+                ],
                       ),
                     ],
                   ),
+        ),
+      IconButton(
+          icon: Icon(Icons.add), color: Colors.black,
+          onPressed: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) =>
+
+                    DetailsPage(heroTag: imgPath, goalName: goalName)));
+          }
+
+      ),
                 ],
               ),
-            ),
-            IconButton(
-                icon: Icon(Icons.add), color: Colors.black, onPressed: () {}),
-          ],
-        ),
-      ),
+    ),
     );
   }
 }
