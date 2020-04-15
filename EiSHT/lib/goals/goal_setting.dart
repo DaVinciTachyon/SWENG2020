@@ -11,7 +11,7 @@ class _GoalSettingState extends State<GoalSetting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFF9800),
+      backgroundColor:  Colors.deepOrangeAccent,
       body: SafeArea(
         child: ListView(
           children: <Widget>[
@@ -73,7 +73,7 @@ class _GoalSettingState extends State<GoalSetting> {
             Container(
               height: MediaQuery.of(context).size.height - 185.0,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color:  Colors.orange[50],
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(75.0)),
               ),
               child: ListView(
@@ -108,20 +108,20 @@ class _GoalSettingState extends State<GoalSetting> {
         padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
         child: InkWell(
           onTap: ()async {
-            ANewGoal makeGoal =await
+          //  ANewGoal makeGoal =await     CHECK
             Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) =>
 
                     DetailsPage(heroTag: imgPath, goalName: goalName))
             );
-            if(makeGoal!= null){
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) =>
+           // if(makeGoal!= null){
+            //  Navigator.of(context).push(MaterialPageRoute(
+            //      builder: (context) =>
 
-                      DetailsPage(heroTag: imgPath, goalName: goalName, newGoalName : makeGoal.goalName,
-                          newMiniGoal: makeGoal.goalMini, newDescription : makeGoal.goalDescription))
-              );
-            }
+            //          DetailsPage(heroTag: imgPath, goalName: goalName, newGoalName : makeGoal.goalName,
+            //              newMiniGoal: makeGoal.goalMini, newDescription : makeGoal.goalDescription))
+          //    );
+           // }
 
           },
           child: Row(
@@ -157,8 +157,16 @@ class _GoalSettingState extends State<GoalSetting> {
                 ),
               ),
               IconButton(
-                  icon: Icon(Icons.add), color: Colors.black, onPressed: () {}),
-            ],
+                  icon: Icon(Icons.add), color: Colors.black,
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (context) =>
+
+                            DetailsPage(heroTag: imgPath, goalName: goalName)));
+                  }
+
+    ), ],
+
           ),
         ),
     );
