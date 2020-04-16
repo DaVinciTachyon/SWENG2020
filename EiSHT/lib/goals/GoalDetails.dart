@@ -13,22 +13,22 @@ DateTime change = DateTime.now();
 class _GoalDetailsState extends State<GoalDetails> {
   double _height= 100;
   double _width = 100;
-  var _color = Colors.orange[700];
+  var _color;
   bool _hasBeenPressed = false;
-  double _progress =0;
+  double _progress;
   int daysLeft =0;
 
   _animateContainer(){
     setState((){
-      _color = _color ==Colors.orange[700]? Colors.yellow : Colors.orange[700];
+      //_color = _color ==Colors.orange[700]? Colors.yellow : Colors.orange[700];
     });
    }
    _getColour(){
      if(_progress > .99){
        _progress = 100;
-       return Colors.lightGreenAccent;
+       return Colors.green[600];
      }
-     return Colors.deepOrangeAccent;
+     return _color;
    }
 
    _goalCompleted(){
@@ -37,20 +37,23 @@ class _GoalDetailsState extends State<GoalDetails> {
          textAlign: TextAlign.center,
        );
      }
-    return  Text('Have you completed your goal today? (Tap)',style : TextStyle(fontSize : 24,color : Colors.white),
+    return  Text('Have you completed your mini goal today? (Tap)',style : TextStyle(fontSize : 24,color : Colors.white),
        textAlign: TextAlign.center,
      );
    }
   Widget build(BuildContext context) {
+    _color = Theme.of(context).primaryColor;
+    _progress = widget.theGoal.getPercentageComplete()/100;
+    
     return Scaffold(
-      backgroundColor: Colors.deepOrangeAccent,
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
           icon: Icon(Icons.arrow_back_ios),
-          color: Colors.white,
+          color: Theme.of(context).buttonColor,
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -62,7 +65,7 @@ class _GoalDetailsState extends State<GoalDetails> {
               widget.theGoal.goalMini,
               style: TextStyle(
 
-                  fontFamily: 'Monserrat', fontSize: 27.0, color: Colors.white),
+                  fontFamily: 'Monserrat', fontSize: 27.0, color: Theme.of(context).buttonColor),
             ),
           ),
         ),
@@ -71,14 +74,14 @@ class _GoalDetailsState extends State<GoalDetails> {
           IconButton(
             icon: Icon(Icons.more_horiz),
             onPressed: () {},
-            color: Colors.white,
+            color: Theme.of(context).buttonColor,
           ),
         ],
       ),
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.orange[50],
+            color: Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(45.0),
               topRight: Radius.circular(45.0),
@@ -99,7 +102,7 @@ class _GoalDetailsState extends State<GoalDetails> {
             ),
             SizedBox(height :60),
             Card(
-              color: Colors.orange[50],
+              color: Theme.of(context).scaffoldBackgroundColor,
               shape: RoundedRectangleBorder(
                 side: BorderSide(color: _getColour(), width: 2),
               ),
@@ -125,13 +128,13 @@ class _GoalDetailsState extends State<GoalDetails> {
                     _progress = _progress + (1/ widget.theGoal.howMuchLeft());
                     widget.theGoal.setPercentageComplete(_progress);
                     if(_progress > .99){
-                        _color = Colors.lightGreenAccent;
+                        _color = Colors.green[600];
                         
                     }
                     DateTime isNextDay = DateTime.now();
 
                     if(change.difference(isNextDay).inDays == 1){
-                      _color = Colors.orange;
+                      _color = Theme.of(context).primaryColor;
                       change = isNextDay;
                     }
                   }),
@@ -139,13 +142,16 @@ class _GoalDetailsState extends State<GoalDetails> {
             SizedBox(height :40),
 
             //SizedBox(height: 10),
-            Text('Look how far you are!',style : TextStyle(fontSize : 16,color : Colors.deepOrangeAccent),
+            Text('Look how far you are!',style : TextStyle(fontSize : 16,color : Theme.of(context).primaryColor),
             ),
-            LinearProgressIndicator(
-              value:_progress,
-              backgroundColor : Colors.amber,
-              valueColor: AlwaysStoppedAnimation<Color>(Colors.pink),
-
+            Container(
+              margin: EdgeInsets.all(5.0),
+              height: 15.0,
+              child: LinearProgressIndicator(
+                value:_progress,
+                backgroundColor : Colors.amber,
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.pink),
+              ),
             ),
 
 
