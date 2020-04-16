@@ -102,7 +102,7 @@ class _CreateGoalState extends State<CreateGoal> {
               height: 75.0,
               width: 75,
               decoration: BoxDecoration(
-                color: Colors.deepOrangeAccent,
+                color: Theme.of(context).primaryColor,
                 borderRadius: BorderRadius.circular(8.0),
               ),
               child: IconButton(
@@ -121,7 +121,7 @@ class _CreateGoalState extends State<CreateGoal> {
     }
 
     return Scaffold(
-      backgroundColor: Colors.deepOrangeAccent,
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -164,7 +164,7 @@ class _CreateGoalState extends State<CreateGoal> {
                       topLeft: Radius.circular(45.0),
                       topRight: Radius.circular(45.0),
                     ),
-                    color: Colors.orange[50],
+                    color: Theme.of(context).scaffoldBackgroundColor,
                   ),
                   height: widget.imageSizeForTop.height - 100.0,
                   width: widget.imageSizeForTop.width,
@@ -192,7 +192,7 @@ class _CreateGoalState extends State<CreateGoal> {
                         child: Text(
                           'Add New Goal',
                           style: TextStyle(
-                            color: Colors.deepOrangeAccent,
+                            color: Theme.of(context).primaryColor,
                             fontSize: 20,
                           ),
                         ),
