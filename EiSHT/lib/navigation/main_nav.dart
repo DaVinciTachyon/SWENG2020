@@ -5,7 +5,8 @@ import 'package:EiSHT/journal/journal.dart';
 import 'package:EiSHT/audioRecorder/audioPage.dart';
 
 class MainNav extends StatelessWidget {
-  final int buttonHeight = 150;
+  final double buttonHeight = 100;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,8 +14,8 @@ class MainNav extends StatelessWidget {
         children: <Widget>[
           Container(
             width: double.infinity,
-            //height: 490,
             height: (MediaQuery.of(context).size.height) -
+                buttonHeight -
                 buttonHeight -
                 buttonHeight -
                 15,
@@ -31,37 +32,10 @@ class MainNav extends StatelessWidget {
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: <Widget>[
-                    FlatButton(
-                      // padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
-                      shape: new CircleBorder(),
-                      // color: Colors.white,
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular((75 / 2)),
-
-                        child: Image(
-                            image: AssetImage('images/logo-ed.png'),
-                            fit: BoxFit.cover,
-                            height: 70,
-                            width: 70),
-                        //icon: Image.asset('images/logo.jpg'),
-                        // icon: Image.asset('037-fame.png'),
-                      ),
-
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute<bool>(
-                            builder: (BuildContext context) {
-                              return AudioPage();
-                            },
-                          ),
-                        );
-                      },
-                    ),
+                    _logo(),
                   ],
                 ),
                 RichText(
-                  //  textAlign: TextAlign.center,
                   text: TextSpan(children: <TextSpan>[
                     TextSpan(
                       text: "Welcome to",
@@ -82,70 +56,82 @@ class MainNav extends StatelessWidget {
               ],
             ),
           ),
-          Container(
-            width: double.infinity,
-            height: 150,
-            padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
-            child: RaisedButton(
-              elevation: 0.5,
-              color: Theme.of(context).buttonColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(75.0),
-              ),
-              child: Text(
-                "Goals",
-                style: TextStyle(
-                  fontSize: 25.0,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor,
-                ),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<bool>(
-                    builder: (BuildContext context) {
-                      return GoalSetting();
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
-          Container(
-            width: double.infinity,
-            height: 150,
-            padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
-            child: RaisedButton(
-              elevation: 0.5,
-              color: Theme.of(context).buttonColor,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(75.0),
-              ),
-              child: Text(
-                "Journal",
-                style: TextStyle(
-                  fontSize: 25.0,
-                  fontFamily: 'Montserrat',
-                  fontWeight: FontWeight.bold,
-                  color: Theme.of(context).primaryColor,
-                ),
-              ),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute<bool>(
-                    builder: (BuildContext context) {
-                      return JournalPage();
-                    },
-                  ),
-                );
-              },
-            ),
-          ),
+          _button(context, GoalSetting(), buttonHeight, "Goals"),
+          _button(context, JournalPage(), buttonHeight, "Text Journal"),
+          _button(context, AudioPage(), buttonHeight, "Audio Journal"),
+          // .. TODO: replace "null" with audio entries page when built
         ],
       ),
     );
   }
 }
+
+Widget _logo() {
+  return FlatButton(
+    shape: new CircleBorder(),
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular((75 / 2)),
+      child: Image(
+        image: AssetImage('images/logo-ed.png'),
+        fit: BoxFit.cover,
+        height: 70,
+        width: 70,
+      ),
+    ),
+    onPressed: () {},
+  );
+}
+
+Widget _button(BuildContext context, Widget destPage, double height, String text) {
+  return Container(
+    width: double.infinity,
+    height: height,
+    padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
+    child: RaisedButton(
+      elevation: 0.5,
+      color: Theme.of(context).buttonColor,
+      shape: RoundedRectangleBorder(
+        borderRadius: BorderRadius.circular(75.0),
+      ),
+      child: Text(
+        text,
+        style: TextStyle(
+          fontSize: 20.0,
+          fontFamily: 'Montserrat',
+          fontWeight: FontWeight.bold,
+          color: Theme.of(context).primaryColor,
+        ),
+      ),
+      onPressed: () {
+        Navigator.push(
+          context,
+          MaterialPageRoute<bool>(
+            builder: (BuildContext context) {
+              return destPage;
+            },
+          ),
+        );
+      },
+    ),
+  );
+}
+
+// Widget _journalDropDown(BuildContext context) {
+//   var _buttons = [_textEntriesButton(context), _audioEntriesButton(context)];
+
+//   return Container(
+//     width: double.infinity,
+//     height: 150,
+//     padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
+//     child: DropdownButton<Widget>(
+//       items: _buttons.map((Widget dropDownWidgetItem) {
+//         return DropdownMenuItem<Widget>(
+//           value: dropDownWidgetItem,
+//           child: Text("Text goes here"),
+//         );
+//       }).toList(),
+//     ),
+//   );
+// }
+
+// i tried to get that to work, maybe later
