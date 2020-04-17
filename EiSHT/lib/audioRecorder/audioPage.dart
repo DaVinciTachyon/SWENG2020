@@ -9,6 +9,7 @@ import 'package:audio_recorder/audio_recorder.dart';
 import 'package:path_provider/path_provider.dart';
 
 import 'package:EiSHT/audioRecorder/audio_file_list_tile.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 class AudioPage extends StatefulWidget {
   @override
@@ -102,6 +103,7 @@ class AudioScreenState extends State<AudioScreen> {
     // Await return of Recording object
     //var recording = await AudioRecorder.stop();
     bool isRecording = await AudioRecorder.isRecording;
+    await AudioRecorder.stop();
 
     //final storage = SharedAudioContext.of(context).storage;
     //Directory docDir = await storage.docDir;
@@ -120,6 +122,10 @@ class AudioScreenState extends State<AudioScreen> {
     try {
       //final storage = SharedAudioContext.of(context).storage;
       //Directory docDir = await storage.docDir;
+      await [
+        Permission.storage,
+        Permission.microphone,
+      ].request();
       Directory docDir = await getApplicationDocumentsDirectory();
       String newFilePath = p.join(docDir.path, this.tempFilename);
       File tempAudioFile = File(newFilePath + '.m4a');
@@ -202,10 +208,12 @@ class AudioScreenState extends State<AudioScreen> {
     var futureBuilders = new FutureBuilder(
       future: getApplicationDocumentsDirectory(),
       builder: (context, snapshot) {
-        if (snapshot.hasError) {
+        if (snapshot.hasError ||
+            snapshot.connectionState == ConnectionState.waiting) {
           print("has error");
           return new Text('Error: ${snapshot.error}');
         } else {
+          print("snapshot: $snapshot");
           return createFileListView(context, snapshot);
         }
       },

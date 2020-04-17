@@ -187,7 +187,7 @@ class JournalScreenState extends State<JournalScreen> {
     List<Journal> _entries = snapshot.data;
 
     return new ListView.builder(
-      itemCount: _entries.length,
+      itemCount: _entries != null ? _entries.length : 0,
       itemBuilder: (context, int index) {
         print("count is " + _entries.length.toString());
         id = index;

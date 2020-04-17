@@ -35,23 +35,25 @@ class MainNav extends StatelessWidget {
                     _logo(),
                   ],
                 ),
-                RichText(
-                  text: TextSpan(children: <TextSpan>[
-                    TextSpan(
-                      text: "Welcome to",
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontWeight: FontWeight.bold,
+                Flexible(
+                  child: RichText(
+                    text: TextSpan(children: <TextSpan>[
+                      TextSpan(
+                        text: "Welcome to",
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
-                    ),
-                    TextSpan(
-                      text: "\nEiSHT",
-                      style: TextStyle(
-                        fontFamily: 'Montserrat',
-                        fontSize: 60,
+                      TextSpan(
+                        text: "\nEiSHT",
+                        style: TextStyle(
+                          fontFamily: 'Montserrat',
+                          fontSize: 60,
+                        ),
                       ),
-                    ),
-                  ]),
+                    ]),
+                  ),
                 ),
               ],
             ),
@@ -82,12 +84,14 @@ Widget _logo() {
   );
 }
 
-Widget _button(BuildContext context, Widget destPage, double height, String text) {
+Widget _button(
+    BuildContext context, Widget destPage, double height, String text) {
   return Container(
     width: double.infinity,
     height: height,
     padding: EdgeInsets.fromLTRB(15, 15, 15, 0),
     child: RaisedButton(
+      key: Key(text),
       elevation: 0.5,
       color: Theme.of(context).buttonColor,
       shape: RoundedRectangleBorder(
