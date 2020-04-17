@@ -4,11 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:EiSHT/goals/createGoals.dart';
 import 'package:EiSHT/goals/ANewGoal.dart';
 import 'package:EiSHT/goals/GoalDetails.dart';
-import 'package:EiSHT/models/goalModel.dart';
-import 'package:EiSHT/repository/goalDatabase.dart';
 
 class DetailsPage extends StatefulWidget {
-  final id;
   final heroTag;
   final goalName;
   String theGName;
@@ -19,8 +16,7 @@ class DetailsPage extends StatefulWidget {
   final newDescription;
 
   DetailsPage(
-      {this.id,
-      this.heroTag,
+      {this.heroTag,
       this.goalName,
       this.newGoalName,
       this.newMiniGoal,
@@ -31,7 +27,6 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
-  final db = GoalDatabase();
   List<ANewGoal> goals = List();
   @override
   Widget _goalWidget(ANewGoal makeGoal) {
@@ -69,30 +64,7 @@ class _DetailsPageState extends State<DetailsPage> {
     return Theme.of(context).primaryColor;
   }
 
-  void _setGoal() async {
-    var _dbgoal = await db.fetchGoal(widget.id);
-    if (_dbgoal != null) {
-      ANewGoal _goal = ANewGoal(
-        _dbgoal.goalName,
-        _dbgoal.goalMini,
-        _dbgoal.goalDescription,
-        _dbgoal.endDay,
-        id: _dbgoal.id,
-        percentageComplete: _dbgoal.percentageComplete,
-        dateNow: _dbgoal.dateNow,
-      );
-
-      goals.insert(0, _goal);
-      setState(
-        () {
-          _goalWidget(goals[0]);
-        },
-      );
-    }
-  }
-
   Widget build(BuildContext context) {
-    _setGoal();
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
@@ -152,7 +124,7 @@ class _DetailsPageState extends State<DetailsPage> {
               ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  itemCount: 1,
+                  itemCount: goals.length,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
                       child: Card(
@@ -184,9 +156,8 @@ class _DetailsPageState extends State<DetailsPage> {
                             ),
                             onTap: () {
                               Navigator.of(context).push(MaterialPageRoute(
-                                  builder: (context) => GoalDetails(
-                                        theGoal: goals[index],
-                                      )));
+                                  builder: (context) =>
+                                      GoalDetails(theGoal: goals[index])));
                             }),
                       ),
                     );
@@ -203,13 +174,21 @@ class _DetailsPageState extends State<DetailsPage> {
 
         backgroundColor: Colors.white,
         onPressed: () async {
-          await Navigator.of(context).push(MaterialPageRoute(
+          ANewGoal newGoal = await Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => CreateGoal(
-                  id: widget.id,
                   goalType: widget.goalName,
                   imageSizeForTop: MediaQuery.of(context).size)));
 
-          _setGoal();
+          print(newGoal.goalName);
+          goals.add(newGoal);
+
+          // goals[0] = newGoal;
+
+          setState(
+            () {
+              _goalWidget(goals[0]);
+            },
+          );
         },
       ),
     );
