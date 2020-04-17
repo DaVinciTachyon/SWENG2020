@@ -40,8 +40,7 @@ class _GoalSettingState extends State<GoalSetting> {
                         ),
                         IconButton(
                           icon: Icon(Icons.menu),
-                          color: Theme.of(context).buttonColor,
-                          onPressed: () {},
+                          color: Theme.of(context).buttonColor
                         ),
                       ],
                     ),
@@ -65,8 +64,7 @@ class _GoalSettingState extends State<GoalSetting> {
                   SizedBox(width: 10),
                   Text(
                     'Setting',
-                    style: TextStyle(
-                        color: Theme.of(context).buttonColor, fontSize: 25.0),
+                    style: TextStyle(color: Theme.of(context).buttonColor, fontSize: 25.0),
                   ),
                 ],
               ),
