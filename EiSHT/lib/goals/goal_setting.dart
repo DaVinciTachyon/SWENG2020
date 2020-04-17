@@ -86,11 +86,11 @@ class _GoalSettingState extends State<GoalSetting> {
                       height: MediaQuery.of(context).size.height - 300.0,
                       child: ListView(children: [
                         _buildGoalItem(
-                            0, 'images/003-medal.png', 'Personal Goals', '4'),
-                        _buildGoalItem(1, 'images/022-earn-money.png',
+                            'images/003-medal.png', 'Personal Goals', '4'),
+                        _buildGoalItem('images/022-earn-money.png',
                             'Professional Goals', '4'),
                         _buildGoalItem(
-                            2, 'images/008-vision.png', 'Self Awareness', '4'),
+                            'images/008-vision.png', 'Self Awareness', '4'),
                       ]),
                     ),
                   ),
@@ -103,17 +103,23 @@ class _GoalSettingState extends State<GoalSetting> {
     );
   }
 
-  Widget _buildGoalItem(int id, String imgPath, String goalName, String price) {
+  Widget _buildGoalItem(String imgPath, String goalName, String price) {
     return Padding(
       padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
       child: InkWell(
         onTap: () async {
           //  ANewGoal makeGoal =await     CHECK
-          Navigator.of(context).push(
-            MaterialPageRoute(
-                builder: (context) =>
-                    DetailsPage(id: id, heroTag: imgPath, goalName: goalName)),
-          );
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) =>
+                  DetailsPage(heroTag: imgPath, goalName: goalName)));
+          // if(makeGoal!= null){
+          //  Navigator.of(context).push(MaterialPageRoute(
+          //      builder: (context) =>
+
+          //          DetailsPage(heroTag: imgPath, goalName: goalName, newGoalName : makeGoal.goalName,
+          //              newMiniGoal: makeGoal.goalMini, newDescription : makeGoal.goalDescription))
+          //    );
+          // }
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
