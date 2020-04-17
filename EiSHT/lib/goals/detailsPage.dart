@@ -152,7 +152,7 @@ class _DetailsPageState extends State<DetailsPage> {
               ListView.builder(
                   scrollDirection: Axis.vertical,
                   shrinkWrap: true,
-                  itemCount: 1,
+                  itemCount: goals.length > 0 ? 1 : 0,
                   itemBuilder: (BuildContext context, int index) {
                     return Container(
                       child: Card(
