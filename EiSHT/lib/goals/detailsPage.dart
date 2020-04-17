@@ -82,7 +82,7 @@ class _DetailsPageState extends State<DetailsPage> {
         dateNow: _dbgoal.dateNow,
       );
 
-      goals.add(_goal);
+      goals.insert(0, _goal);
       setState(
         () {
           _goalWidget(goals[0]);
@@ -203,23 +203,13 @@ class _DetailsPageState extends State<DetailsPage> {
 
         backgroundColor: Colors.white,
         onPressed: () async {
-          ANewGoal newGoal = await Navigator.of(context).push(MaterialPageRoute(
+          await Navigator.of(context).push(MaterialPageRoute(
               builder: (context) => CreateGoal(
                   id: widget.id,
                   goalType: widget.goalName,
                   imageSizeForTop: MediaQuery.of(context).size)));
 
-          //findMe
-          print(newGoal);
-          goals.add(newGoal);
-
-          // goals[0] = newGoal;
-
-          setState(
-            () {
-              _goalWidget(goals[0]);
-            },
-          );
+          _setGoal();
         },
       ),
     );

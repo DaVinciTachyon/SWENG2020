@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
-import 'detailsPage.dart';
-import 'package:EiSHT/goals/ANewGoal.dart';
 import 'package:EiSHT/models/goalModel.dart';
 import 'package:EiSHT/repository/goalDatabase.dart';
-import 'package:intl/intl.dart';
 
 class CreateGoal extends StatefulWidget {
   final goalType;
@@ -218,10 +215,7 @@ class _CreateGoalState extends State<CreateGoal> {
                               dateNow: DateTime.now(),
                             );
                             await db.addGoal(goal);
-                            //findMe
-                            ANewGoal _theGoal = new ANewGoal(_newGoalName,
-                                _miniGoal, _newGoalDescription, _date);
-                            Navigator.pop(context, _theGoal);
+                            Navigator.pop(context);
                           }
                           ;
                         },

@@ -110,17 +110,11 @@ class _GoalSettingState extends State<GoalSetting> {
       child: InkWell(
         onTap: () async {
           //  ANewGoal makeGoal =await     CHECK
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) =>
-                  DetailsPage(id: id, heroTag: imgPath, goalName: goalName)));
-          // if(makeGoal!= null){
-          //  Navigator.of(context).push(MaterialPageRoute(
-          //      builder: (context) =>
-
-          //          DetailsPage(heroTag: imgPath, goalName: goalName, newGoalName : makeGoal.goalName,
-          //              newMiniGoal: makeGoal.goalMini, newDescription : makeGoal.goalDescription))
-          //    );
-          // }
+          Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (context) =>
+                    DetailsPage(id: id, heroTag: imgPath, goalName: goalName)),
+          );
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
