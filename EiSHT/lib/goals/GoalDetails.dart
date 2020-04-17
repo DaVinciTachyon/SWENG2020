@@ -51,7 +51,12 @@ class _GoalDetailsState extends State<GoalDetails> {
     );
   }
 
+  _start() {
+    _progress = widget.theGoal.getPercentageComplete() / 100;
+  }
+
   Widget build(BuildContext context) {
+    _start();
     return Scaffold(
       backgroundColor: Colors.deepOrangeAccent,
       appBar: AppBar(
