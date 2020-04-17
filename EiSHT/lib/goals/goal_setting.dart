@@ -12,7 +12,7 @@ class _GoalSettingState extends State<GoalSetting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFFF9800),
+      backgroundColor: Colors.deepOrangeAccent,
       body: SafeArea(
         child: ListView(
           children: <Widget>[
@@ -74,7 +74,7 @@ class _GoalSettingState extends State<GoalSetting> {
             Container(
               height: MediaQuery.of(context).size.height - 185.0,
               decoration: BoxDecoration(
-                color: Colors.white,
+                color: Colors.orange[50],
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(75.0)),
               ),
               child: ListView(
@@ -87,11 +87,11 @@ class _GoalSettingState extends State<GoalSetting> {
                       height: MediaQuery.of(context).size.height - 300.0,
                       child: ListView(children: [
                         _buildGoalItem(
-                            'images/003-medal.png', 'Personal Goals', '4'),
-                        _buildGoalItem('images/022-earn-money.png',
+                            0, 'images/003-medal.png', 'Personal Goals', '4'),
+                        _buildGoalItem(1, 'images/022-earn-money.png',
                             'Professional Goals', '4'),
                         _buildGoalItem(
-                            'images/008-vision.png', 'Self Awareness', '4'),
+                            2, 'images/008-vision.png', 'Self Awareness', '4'),
                       ]),
                     ),
                   ),
@@ -104,24 +104,17 @@ class _GoalSettingState extends State<GoalSetting> {
     );
   }
 
-  Widget _buildGoalItem(String imgPath, String goalName, String price) {
+  Widget _buildGoalItem(int id, String imgPath, String goalName, String price) {
     return Padding(
       padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
       child: InkWell(
         onTap: () async {
-          ANewGoal makeGoal = await Navigator.of(context).push(
-              MaterialPageRoute(
-                  builder: (context) =>
-                      DetailsPage(heroTag: imgPath, goalName: goalName)));
-          // if (makeGoal != null) {
-          Navigator.of(context).push(MaterialPageRoute(
-              builder: (context) => DetailsPage(
-                  heroTag: imgPath,
-                  goalName: goalName,
-                  newGoalName: makeGoal.goalName,
-                  newMiniGoal: makeGoal.goalMini,
-                  newDescription: makeGoal.goalDescription)));
-          // }
+          //  ANewGoal makeGoal =await     CHECK
+          Navigator.of(context).push(
+            MaterialPageRoute(
+                builder: (context) =>
+                    DetailsPage(id: id, heroTag: imgPath, goalName: goalName)),
+          );
         },
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -155,8 +148,6 @@ class _GoalSettingState extends State<GoalSetting> {
                 ],
               ),
             ),
-            IconButton(
-                icon: Icon(Icons.add), color: Colors.black, onPressed: () {}),
           ],
         ),
       ),
