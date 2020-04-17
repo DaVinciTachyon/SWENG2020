@@ -18,6 +18,7 @@ class _GoalDetailsState extends State<GoalDetails> {
   double _width = 100;
   var _color = Colors.orange[700];
   bool _hasBeenPressed = false;
+
   double _progress = 0;
   int daysLeft = 0;
 
