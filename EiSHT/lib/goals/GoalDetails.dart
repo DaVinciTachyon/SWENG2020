@@ -16,40 +16,38 @@ DateTime change = DateTime.now();
 class _GoalDetailsState extends State<GoalDetails> {
   double _height = 100;
   double _width = 100;
-  var _color = Colors.orange[700];
+  var _color;
   bool _hasBeenPressed = false;
   double _progress = 0;
   int daysLeft = 0;
 
-  _animateContainer() {
-    setState(() {
-      _color =
-          _color == Colors.orange[700] ? Colors.yellow : Colors.orange[700];
+  _animateContainer(){
+    setState((){
+      //_color = _color ==Colors.orange[700]? Colors.yellow : Colors.orange[700];
     });
-  }
+   }
 
-  _getColour() {
-    if (_progress > .99) {
-      _progress = 100;
-      return Colors.lightGreenAccent;
-    }
-    return Colors.deepOrangeAccent;
-  }
+  _getColour(){
+     if(_progress > .99){
+       _progress = 100;
+       return Colors.green[600];
+     }
+     return _color;
+   }
 
-  _goalCompleted() {
-    if (_progress > .99) {
-      return Text(
-        'HURRAY, You have completed your goal!',
-        style: TextStyle(fontSize: 24, color: Colors.white),
-        textAlign: TextAlign.center,
-      );
-    }
-    return Text(
-      'Have you completed your goal today? (Tap)',
-      style: TextStyle(fontSize: 24, color: Colors.white),
-      textAlign: TextAlign.center,
-    );
-  }
+  _goalCompleted(){
+     if(_progress > .99){
+       return Text('HURRAY, You have completed your goal!',style : TextStyle(fontSize : 24,color : Colors.white),
+         textAlign: TextAlign.center,
+       );
+     }
+    return  Text('Have you completed your mini goal today? (Tap)',style : TextStyle(fontSize : 24,color : Colors.white),
+       textAlign: TextAlign.center,
+     );
+   }
+  Widget build(BuildContext context) {
+    _color = Theme.of(context).primaryColor;
+    _progress = widget.theGoal.getPercentageComplete()/100;
 
   _start() {
     _progress = widget.theGoal.getPercentageComplete() / 100;
@@ -58,14 +56,14 @@ class _GoalDetailsState extends State<GoalDetails> {
   Widget build(BuildContext context) {
     _start();
     return Scaffold(
-      backgroundColor: Colors.deepOrangeAccent,
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
           icon: Icon(Icons.arrow_back_ios),
-          color: Colors.white,
+          color: Theme.of(context).buttonColor,
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -75,7 +73,7 @@ class _GoalDetailsState extends State<GoalDetails> {
             child: Text(
               widget.theGoal.goalMini,
               style: TextStyle(
-                  fontFamily: 'Monserrat', fontSize: 27.0, color: Colors.white),
+                  fontFamily: 'Monserrat', fontSize: 27.0, color: Theme.of(context).buttonColor),
             ),
           ),
         ),
@@ -84,28 +82,35 @@ class _GoalDetailsState extends State<GoalDetails> {
           IconButton(
             icon: Icon(Icons.more_horiz),
             onPressed: () {},
-            color: Colors.white,
+            color: Theme.of(context).buttonColor,
           ),
         ],
       ),
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.orange[50],
+            color: Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(45.0),
               topRight: Radius.circular(45.0),
             ),
           ),
           child: Column(
-            children: <Widget>[
-              SizedBox(height: 20),
-              AnimatedContainer(
-                duration: Duration(seconds: 1),
-                height: _height,
-                width: _width,
-                decoration: BoxDecoration(
-                    color: _color, borderRadius: BorderRadius.circular(45.0)),
+          children: <Widget>[
+            SizedBox(height :20),
+            AnimatedContainer(
+              duration : Duration(seconds: 1),
+              height : _height,
+              width : _width,
+              decoration: BoxDecoration(
+                  color: _color,
+                  borderRadius: BorderRadius.circular(45.0)),
+            ),
+            SizedBox(height :60),
+            Card(
+              color: Theme.of(context).scaffoldBackgroundColor,
+              shape: RoundedRectangleBorder(
+                side: BorderSide(color: _getColour(), width: 2),
               ),
               SizedBox(height: 60),
               Card(
@@ -125,30 +130,43 @@ class _GoalDetailsState extends State<GoalDetails> {
                       textAlign: TextAlign.center),
                 ),
               ),
+            SizedBox(height :30),
+            Card(
+              color :_getColour(),
+              child: OutlineButton(
+                padding: EdgeInsets.all(8.0),
 
-              SizedBox(height: 30),
-              Card(
-                color: _getColour(),
-                child: OutlineButton(
-                    padding: EdgeInsets.all(8.0),
-                    child: _goalCompleted(),
-                    onPressed: () {
-                      _animateContainer();
-                      _progress =
-                          _progress + (1 / widget.theGoal.howMuchLeft());
-                      widget.theGoal.setPercentageComplete(_progress);
-                      if (_progress > .99) {
-                        _color = Colors.lightGreenAccent;
-                      }
-                      DateTime isNextDay = DateTime.now();
+                child : _goalCompleted(),
+                  onPressed:(){
+                    _animateContainer();
+                    _progress = _progress + (1/ widget.theGoal.howMuchLeft());
+                    widget.theGoal.setPercentageComplete(_progress);
+                    if(_progress > .99){
+                        _color = Colors.green[600];
+                        
+                    }
+                    DateTime isNextDay = DateTime.now();
 
-                      if (change.difference(isNextDay).inDays == 1) {
-                        _color = Colors.orange;
-                        change = isNextDay;
-                      }
-                    }),
+                    if(change.difference(isNextDay).inDays == 1){
+                      _color = Theme.of(context).primaryColor;
+                      change = isNextDay;
+                    }
+                  }),
+            ),
+            SizedBox(height :40),
+
+            //SizedBox(height: 10),
+            Text('Look how far you are!',style : TextStyle(fontSize : 16,color : Theme.of(context).primaryColor),
+            ),
+            Container(
+              margin: EdgeInsets.all(5.0),
+              height: 15.0,
+              child: LinearProgressIndicator(
+                value:_progress,
+                backgroundColor : Colors.amber,
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.pink),
               ),
-              SizedBox(height: 40),
+            ),
 
               //SizedBox(height: 10),
               Text(
