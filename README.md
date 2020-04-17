@@ -2,6 +2,10 @@
 
 Software Engineering project of group 23: Incubator App for EiSHT
 
+### What Is Contained?
+
+The Source Code for a Flutter Application which may be run on android and iOS.
+
 ### How To Install
 
 1. Install Android Studio, an emulator and Flutter
@@ -18,3 +22,5 @@ Software Engineering project of group 23: Incubator App for EiSHT
 2. `cd EiSHT/`
 3. Make sure an emulator is running or you are connected to your android phone in developer mode
 4. `flutter run`
+
+### Video
