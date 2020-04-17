@@ -80,13 +80,6 @@ void main() {
 
       /// check for new page
       expect(find.byType(AudioPage), findsOneWidget);
-      // MainNav nav = MainNav();
-      // await tester.pumpWidget(makeTestableWidget(
-      //   child: nav,
-      // ));
-      // expect(find.text('Audio Journal'), findsOneWidget);
-      // await tester.tap(find.byKey(Key("Audio Journal")));
-      // await tester.pump();
     });
   });
 }
