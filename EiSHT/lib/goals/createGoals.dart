@@ -3,17 +3,22 @@ import 'package:flutter/material.dart';
 import 'dart:async';
 import 'detailsPage.dart';
 import 'package:EiSHT/goals/ANewGoal.dart';
+import 'package:EiSHT/models/goalModel.dart';
+import 'package:EiSHT/repository/goalDatabase.dart';
+import 'package:intl/intl.dart';
 
 class CreateGoal extends StatefulWidget {
   final goalType;
   final imageSizeForTop;
+  final id;
 
-  CreateGoal({this.goalType, this.imageSizeForTop});
+  CreateGoal({this.id, this.goalType, this.imageSizeForTop});
   @override
   _CreateGoalState createState() => _CreateGoalState();
 }
 
 class _CreateGoalState extends State<CreateGoal> {
+  final db = GoalDatabase();
   String _newGoalName;
   String _miniGoal;
   String _newGoalDescription;
@@ -196,13 +201,24 @@ class _CreateGoalState extends State<CreateGoal> {
                             fontSize: 20,
                           ),
                         ),
-                        onPressed: () {
+                        onPressed: () async {
                           if (!_formKey.currentState.validate() &&
                               _date == DateTime.now()) {
                             return;
                           } else if (_formKey.currentState.validate() &&
                               _date != DateTime.now()) {
                             _formKey.currentState.save();
+                            var goal = new Goal(
+                              id: widget.id,
+                              goalName: _newGoalName,
+                              goalMini: _miniGoal,
+                              goalDescription: _newGoalDescription,
+                              percentageComplete: 0,
+                              endDay: _date,
+                              dateNow: DateTime.now(),
+                            );
+                            await db.addGoal(goal);
+                            //findMe
                             ANewGoal _theGoal = new ANewGoal(_newGoalName,
                                 _miniGoal, _newGoalDescription, _date);
                             Navigator.pop(context, _theGoal);
