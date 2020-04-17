@@ -16,7 +16,7 @@ DateTime change = DateTime.now();
 class _GoalDetailsState extends State<GoalDetails> {
   double _height = 100;
   double _width = 100;
-  var _color = Colors.orange[700];
+  var _color;
   bool _hasBeenPressed = false;
   double _progress = 0;
   int daysLeft = 0;
@@ -31,7 +31,7 @@ class _GoalDetailsState extends State<GoalDetails> {
   _getColour() {
     if (_progress > .99) {
       _progress = 100;
-      return Colors.lightGreenAccent;
+      return Colors.green[600];
     }
     return Colors.deepOrangeAccent;
   }
@@ -58,14 +58,14 @@ class _GoalDetailsState extends State<GoalDetails> {
   Widget build(BuildContext context) {
     _start();
     return Scaffold(
-      backgroundColor: Colors.deepOrangeAccent,
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
           icon: Icon(Icons.arrow_back_ios),
-          color: Colors.white,
+          color: Theme.of(context).buttonColor,
         ),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
@@ -75,7 +75,8 @@ class _GoalDetailsState extends State<GoalDetails> {
             child: Text(
               widget.theGoal.goalMini,
               style: TextStyle(
-                  fontFamily: 'Monserrat', fontSize: 27.0, color: Colors.white),
+
+                  fontFamily: 'Monserrat', fontSize: 27.0, color: Theme.of(context).buttonColor),
             ),
           ),
         ),
@@ -84,14 +85,14 @@ class _GoalDetailsState extends State<GoalDetails> {
           IconButton(
             icon: Icon(Icons.more_horiz),
             onPressed: () {},
-            color: Colors.white,
+            color: Theme.of(context).buttonColor,
           ),
         ],
       ),
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.orange[50],
+            color: Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(45.0),
               topRight: Radius.circular(45.0),
@@ -138,7 +139,7 @@ class _GoalDetailsState extends State<GoalDetails> {
                           _progress + (1 / widget.theGoal.howMuchLeft());
                       widget.theGoal.setPercentageComplete(_progress);
                       if (_progress > .99) {
-                        _color = Colors.lightGreenAccent;
+                        _color = Colors.green[600];
                       }
                       DateTime isNextDay = DateTime.now();
 
@@ -155,10 +156,13 @@ class _GoalDetailsState extends State<GoalDetails> {
                 'Look how far you are!',
                 style: TextStyle(fontSize: 16, color: Colors.deepOrangeAccent),
               ),
-              LinearProgressIndicator(
-                value: _progress,
-                backgroundColor: Colors.amber,
-                valueColor: AlwaysStoppedAnimation<Color>(Colors.pink),
+              Container(
+                height: 15,
+                child: LinearProgressIndicator(
+                  value: _progress,
+                  backgroundColor: Colors.amber,
+                  valueColor: AlwaysStoppedAnimation<Color>(Colors.pink),
+                ),
               ),
             ],
           ),

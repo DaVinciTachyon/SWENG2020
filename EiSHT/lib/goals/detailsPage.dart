@@ -64,9 +64,9 @@ class _DetailsPageState extends State<DetailsPage> {
   Color getColour(ANewGoal checkGoal) {
     if (checkGoal.getPercentageComplete() > 99) {
       print(checkGoal.getPercentageComplete());
-      return Colors.lightGreenAccent;
+      return Colors.green[600];
     }
-    return Colors.deepOrangeAccent;
+    return Theme.of(context).primaryColor;
   }
 
   void _setGoal() async {
@@ -94,7 +94,7 @@ class _DetailsPageState extends State<DetailsPage> {
   Widget build(BuildContext context) {
     _setGoal();
     return Scaffold(
-      backgroundColor: Colors.deepOrangeAccent,
+      backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
         leading: IconButton(
           onPressed: () {
@@ -124,7 +124,7 @@ class _DetailsPageState extends State<DetailsPage> {
       body: SafeArea(
         child: Container(
           decoration: BoxDecoration(
-            color: Colors.orange[50],
+            color: Theme.of(context).scaffoldBackgroundColor,
             borderRadius: BorderRadius.only(
               topLeft: Radius.circular(45.0),
               topRight: Radius.circular(45.0),
@@ -174,8 +174,9 @@ class _DetailsPageState extends State<DetailsPage> {
                                   padding:
                                       EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 8.0),
                                   child: Text(
-                                    '${goals[index].getPercentageComplete().toStringAsFixed(2)}' +
-                                        '% ',
+                                    goals[index].getPercentageComplete() >= 100 ? "100%" : 
+                                        '${goals[index].getPercentageComplete().toStringAsFixed(2)}' +
+                                        '%',
                                     style: TextStyle(
                                         fontSize: 18.0, color: Colors.white),
                                   ),
@@ -197,7 +198,7 @@ class _DetailsPageState extends State<DetailsPage> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.add, color: Colors.deepOrangeAccent),
+        child: Icon(Icons.add, color: Theme.of(context).primaryColor),
 
         //color: Colors.deepOrangeAccent,
 

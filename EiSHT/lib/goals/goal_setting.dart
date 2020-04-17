@@ -12,7 +12,7 @@ class _GoalSettingState extends State<GoalSetting> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.deepOrangeAccent,
+      backgroundColor: Theme.of(context).primaryColor,
       body: SafeArea(
         child: ListView(
           children: <Widget>[
@@ -23,7 +23,7 @@ class _GoalSettingState extends State<GoalSetting> {
                 children: <Widget>[
                   IconButton(
                     icon: Icon(Icons.arrow_back_ios),
-                    color: Colors.white,
+                    color: Theme.of(context).buttonColor,
                     onPressed: () {
                       Navigator.pop(context);
                     },
@@ -35,13 +35,12 @@ class _GoalSettingState extends State<GoalSetting> {
                       children: <Widget>[
                         IconButton(
                           icon: Icon(Icons.filter_list),
-                          color: Colors.white,
+                          color: Theme.of(context).buttonColor,
                           onPressed: () {},
                         ),
                         IconButton(
                           icon: Icon(Icons.menu),
-                          color: Colors.white,
-                          onPressed: () {},
+                          color: Theme.of(context).buttonColor
                         ),
                       ],
                     ),
@@ -58,14 +57,14 @@ class _GoalSettingState extends State<GoalSetting> {
                     'Goal',
                     style: TextStyle(
                         fontFamily: 'Montserrat',
-                        color: Colors.white,
+                        color: Theme.of(context).buttonColor,
                         fontWeight: FontWeight.bold,
                         fontSize: 25.0),
                   ),
                   SizedBox(width: 10),
                   Text(
                     'Setting',
-                    style: TextStyle(color: Colors.white, fontSize: 25.0),
+                    style: TextStyle(color: Theme.of(context).buttonColor, fontSize: 25.0),
                   ),
                 ],
               ),
@@ -74,7 +73,7 @@ class _GoalSettingState extends State<GoalSetting> {
             Container(
               height: MediaQuery.of(context).size.height - 185.0,
               decoration: BoxDecoration(
-                color: Colors.orange[50],
+                color: Theme.of(context).scaffoldBackgroundColor,
                 borderRadius: BorderRadius.only(topLeft: Radius.circular(75.0)),
               ),
               child: ListView(
