@@ -208,10 +208,12 @@ class AudioScreenState extends State<AudioScreen> {
     var futureBuilders = new FutureBuilder(
       future: getApplicationDocumentsDirectory(),
       builder: (context, snapshot) {
-        if (snapshot.hasError) {
+        if (snapshot.hasError ||
+            snapshot.connectionState == ConnectionState.waiting) {
           print("has error");
           return new Text('Error: ${snapshot.error}');
         } else {
+          print("snapshot: $snapshot");
           return createFileListView(context, snapshot);
         }
       },
