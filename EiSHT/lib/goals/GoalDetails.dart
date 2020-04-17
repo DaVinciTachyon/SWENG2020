@@ -3,27 +3,31 @@ import 'package:flutter/material.dart';
 import 'ANewGoal.dart';
 
 class GoalDetails extends StatefulWidget {
-   ANewGoal theGoal;
+  ANewGoal theGoal;
+  int id;
 
   GoalDetails({this.theGoal});
   @override
   _GoalDetailsState createState() => _GoalDetailsState();
 }
+
 DateTime change = DateTime.now();
+
 class _GoalDetailsState extends State<GoalDetails> {
-  double _height= 100;
+  double _height = 100;
   double _width = 100;
   var _color;
   bool _hasBeenPressed = false;
-  double _progress;
-  int daysLeft =0;
+  double _progress = 0;
+  int daysLeft = 0;
 
   _animateContainer(){
     setState((){
       //_color = _color ==Colors.orange[700]? Colors.yellow : Colors.orange[700];
     });
    }
-   _getColour(){
+
+  _getColour(){
      if(_progress > .99){
        _progress = 100;
        return Colors.green[600];
@@ -31,7 +35,7 @@ class _GoalDetailsState extends State<GoalDetails> {
      return _color;
    }
 
-   _goalCompleted(){
+  _goalCompleted(){
      if(_progress > .99){
        return Text('HURRAY, You have completed your goal!',style : TextStyle(fontSize : 24,color : Colors.white),
          textAlign: TextAlign.center,
@@ -44,7 +48,13 @@ class _GoalDetailsState extends State<GoalDetails> {
   Widget build(BuildContext context) {
     _color = Theme.of(context).primaryColor;
     _progress = widget.theGoal.getPercentageComplete()/100;
-    
+
+  _start() {
+    _progress = widget.theGoal.getPercentageComplete() / 100;
+  }
+
+  Widget build(BuildContext context) {
+    _start();
     return Scaffold(
       backgroundColor: Theme.of(context).primaryColor,
       appBar: AppBar(
@@ -61,10 +71,8 @@ class _GoalDetailsState extends State<GoalDetails> {
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: Text(
-
               widget.theGoal.goalMini,
               style: TextStyle(
-
                   fontFamily: 'Monserrat', fontSize: 27.0, color: Theme.of(context).buttonColor),
             ),
           ),
@@ -97,8 +105,6 @@ class _GoalDetailsState extends State<GoalDetails> {
               decoration: BoxDecoration(
                   color: _color,
                   borderRadius: BorderRadius.circular(45.0)),
-
-
             ),
             SizedBox(height :60),
             Card(
@@ -106,16 +112,24 @@ class _GoalDetailsState extends State<GoalDetails> {
               shape: RoundedRectangleBorder(
                 side: BorderSide(color: _getColour(), width: 2),
               ),
-              child: Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: Text('Reminder of why you chose this goal.'
-                    ' Stay positive you can do this!\n\n\n'+'"'+widget.theGoal.goalDescription+'"\n',style : TextStyle(fontSize : 24,color : _getColour()),
-                    textAlign: TextAlign.center
+              SizedBox(height: 60),
+              Card(
+                color: Colors.orange[50],
+                shape: RoundedRectangleBorder(
+                  side: BorderSide(color: _getColour(), width: 2),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: Text(
+                      'Reminder of why you chose this goal.'
+                              ' Stay positive you can do this!\n\n\n' +
+                          '"' +
+                          widget.theGoal.goalDescription +
+                          '"\n',
+                      style: TextStyle(fontSize: 24, color: _getColour()),
+                      textAlign: TextAlign.center),
                 ),
               ),
-            ),
-
-
             SizedBox(height :30),
             Card(
               color :_getColour(),
@@ -154,13 +168,20 @@ class _GoalDetailsState extends State<GoalDetails> {
               ),
             ),
 
-
-          ],
-            ),
+              //SizedBox(height: 10),
+              Text(
+                'Look how far you are!',
+                style: TextStyle(fontSize: 16, color: Colors.deepOrangeAccent),
+              ),
+              LinearProgressIndicator(
+                value: _progress,
+                backgroundColor: Colors.amber,
+                valueColor: AlwaysStoppedAnimation<Color>(Colors.pink),
+              ),
+            ],
+          ),
         ),
       ),
-
-          );
-
+    );
   }
 }
