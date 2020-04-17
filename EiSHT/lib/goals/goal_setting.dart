@@ -148,14 +148,6 @@ class _GoalSettingState extends State<GoalSetting> {
                 ],
               ),
             ),
-            IconButton(
-                icon: Icon(Icons.add),
-                color: Colors.black,
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (context) =>
-                          DetailsPage(heroTag: imgPath, goalName: goalName)));
-                }),
           ],
         ),
       ),
