@@ -174,9 +174,7 @@ class _DetailsPageState extends State<DetailsPage> {
                                   padding:
                                       EdgeInsets.fromLTRB(8.0, 0.0, 8.0, 8.0),
                                   child: Text(
-                                    goals[index].getPercentageComplete() >= 100 ? "100%" : 
-                                        '${goals[index].getPercentageComplete().toStringAsFixed(2)}' +
-                                        '%',
+                                    '${goals[index].getPercentageComplete().toStringAsFixed(2)}%',
                                     style: TextStyle(
                                         fontSize: 18.0, color: Colors.white),
                                   ),

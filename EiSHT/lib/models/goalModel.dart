@@ -42,7 +42,8 @@ class Goal {
     map['name'] = this.goalName;
     map['mini'] = this.goalMini;
     map['description'] = this.goalDescription;
-    map['percentageComplete'] = this.percentageComplete;
+    map['percentageComplete'] =
+        this.percentageComplete > 1 ? 1 : this.percentageComplete;
     map['endDay'] = this.endDay.toString();
     map['dateNow'] = this.dateNow.toString();
     return map;
